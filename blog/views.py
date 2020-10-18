@@ -1,12 +1,14 @@
 from django.shortcuts import render,render_to_response,get_object_or_404
 from .models import Blog,BlogType
+from django.conf import settings
 from django.core.paginator import Paginator
 # Create your views here.
+
 
 def blog_list(request):
     context = {}
     blogs_all_list = Blog.objects.all()
-    paginator = Paginator(blogs_all_list,3) # 每3页分一页
+    paginator = Paginator(blogs_all_list,settings.EACH_PAGE_BLOGS_NUMBER) # 每3页分一页
     page_num =  request.GET.get('page',1) # 获取页码参数（GET请求）
     page_of_blogs = paginator.get_page(page_num) #获取当前page页的数据
     curent_page_num = page_of_blogs.number
@@ -42,7 +44,7 @@ def blogs_with_type(request,blog_type_pk):
     context = {}
     blog_type = get_object_or_404(BlogType,pk=blog_type_pk)# 获取页面url传过来的分类
     blogs_all_list = Blog.objects.filter(blog_type=blog_type)
-    paginator = Paginator(blogs_all_list,3) # 每3页分一页
+    paginator = Paginator(blogs_all_list,settings.EACH_PAGE_BLOGS_NUMBER) # 每3页分一页
     page_num =  request.GET.get('page',1) # 获取页码参数（GET请求）
     page_of_blogs = paginator.get_page(page_num) #获取当前page页的数据
     print(paginator.num_pages)
