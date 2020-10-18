@@ -14,9 +14,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{% block blog_list_title %}博客列表{% endblock %}</div>
                     <div class="panel-body">
-                        <div class="blog">
+                        <!-- <div class="blog">
 
-                        </div>
+                        </div> -->
                         {% for blog in blogs %}
                         <div class="blog">
                                 <h3><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>       
