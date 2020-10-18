@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    我的网站|首页
+{% endblock %}
+
+{% block  head-extends %}
+    <link rel="stylesheet"  href="{% static 'home.css' %}">
+{% endblock %}
+
+
+{% block content %}
+    <h1 class="home-content">欢迎访问我的网站,随便看</h1>
+{% endblock %}

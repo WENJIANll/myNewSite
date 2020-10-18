@@ -1,0 +1,4 @@
+#将库冻结导出到文件
+pip freeze > 1.txt
+#下次安装的时候就可以直接在文件中安装了
+pip install -r 1.txt
