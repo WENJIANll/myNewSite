@@ -88,6 +88,17 @@
                         </ul>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">日期归档</div>
+                    <div class="panel-body">
+                        <ul>
+                            {% for datee in blog_dates %}
+                            <li><a href="{% url 'blogs_with_date' datee.year datee.month %}">{{ datee |date:"Y年m月"}}</a></li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

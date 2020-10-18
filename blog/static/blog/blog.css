@@ -21,3 +21,9 @@ ul.blog-info-description li{
     display: inline-block;
     margin-right: 2em;
 }
+div.blog-content{
+    text-indent: 2em;
+}
+div.blog-more{
+    margin-top: 1em;
+}
