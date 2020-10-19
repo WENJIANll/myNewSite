@@ -1,8 +1,12 @@
 from django.shortcuts import render,render_to_response,get_object_or_404
-from .models import Blog,BlogType,ReadNum
+from .models import Blog,BlogType
 from django.conf import settings
 from django.db.models import Count
 from django.core.paginator import Paginator
+from django.contrib.contenttypes.models import ContentType
+from read_account.models import ReadNum
+from read_account.utils import read_account_once
+
 # Create your views here.
 
 def get_blog_list_commoninfo(request,blogs_all_list):
@@ -59,21 +63,15 @@ def blog_list(request):
 def blog_detail(request,blog_pk):
     context = {}
     blog = get_object_or_404(Blog,pk=blog_pk)
-    if not request.COOKIES.get('blog_%s_readed' % blog_pk):
-        if ReadNum.objects.filter(blog=blog).count():
-            readnum = ReadNum.objects.get(blog=blog)
-        else:
-            readnum = ReadNum(blog=blog)
-
-        readnum.read_num += 1
-        readnum.save()
+    read_cookie_key = read_accou nt_once(request,blog)
         # log.readed_num += 1
-        # blog.save()
+        # blog.save()'''
+        
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
     context['blog'] = blog
     response = render_to_response('blog/blog_detail.html',context)
-    response.set_cookie('blog_%s_readed' % blog_pk,'Ture',max_age=60) # cookie类似字典的东西
+    response.set_cookie(read_cookie_key,'Ture',max_age=60) # cookie类似字典的东西
     return response
 
 def blogs_with_type(request,blog_type_pk):
