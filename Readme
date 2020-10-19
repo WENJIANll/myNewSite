@@ -2,3 +2,8 @@
 pip freeze > 1.txt
 #下次安装的时候就可以直接在文件中安装了
 pip install -r 1.txt
+
+-i https://pypi.tuna.tsinghua.edu.cn/simple
+
+pip install django-ckeditor
+pip install pillow
