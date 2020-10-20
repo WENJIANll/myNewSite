@@ -1,9 +1,11 @@
 import datetime
-from django.shortcuts import render_to_response
+from django.shortcuts import render,redirect
 from django.utils import timezone
 from django.db.models import Sum
 from django.core.cache import cache
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth import authenticate, login
+
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
 from blog.models import Blog
 
@@ -45,5 +47,18 @@ def home(request):
     # context['seven_hotdata']  = seven_hotdata
     context['seven_hotdata']  = seven_hotdata
 
-    return render_to_response('home.html',context)
+    return render(request,'home.html',context)
 
+def loginn(request):
+    username = request.POST.get('username','')
+    password = request.POST.get('password','')
+    user = authenticate(request, username=username, password=password)
+    if user is not None:
+        login(request, user)
+        return redirect('/')
+        # Redirect to a success page.
+        ...
+    else:
+        # Return an 'invalid login' error message.
+        ...
+        return render(request,'error.html',{'message':'用户名或密码不正确'})
