@@ -63,7 +63,7 @@ def blog_list(request):
 def blog_detail(request,blog_pk):
     context = {}
     blog = get_object_or_404(Blog,pk=blog_pk)
-    read_cookie_key = read_accou nt_once(request,blog)
+    read_cookie_key = read_account_once(request,blog)
         # log.readed_num += 1
         # blog.save()'''
         
