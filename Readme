@@ -1,9 +1,16 @@
-#将库冻结导出到文件
+# 将库冻结导出到文件
 pip freeze > 1.txt
-#下次安装的时候就可以直接在文件中安装了
+# 下次安装的时候就可以直接在文件中安装了
 pip install -r 1.txt
 
 -i https://pypi.tuna.tsinghua.edu.cn/simple
 
+# 富文本编辑器
 pip install django-ckeditor
+# 富文本编辑器的上传
 pip install pillow
+
+# 聚合函数
+aggregate
+# 分组聚合
+annotate
