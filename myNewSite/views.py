@@ -9,7 +9,7 @@ from django.urls import reverse
 
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
 from blog.models import Blog
-
+from .forms import LoginForm
 
 # Create your views here.
 
@@ -51,6 +51,7 @@ def home(request):
     return render(request,'home.html',context)
 
 def loginn(request):
+    '''
     username = request.POST.get('username','')
     password = request.POST.get('password','')
     user = authenticate(request, username=username, password=password)
@@ -64,4 +65,10 @@ def loginn(request):
     else:
         # Return an 'invalid login' error message.
         ...
-        return render(request,'error.html',{'message':'用户名或密码不正确'})
+        return render(request,'error.html',{'message':'用户名或密码不正确'})'''
+
+    login_form = LoginForm()
+    context = {}
+    context['login_form'] = login_form
+
+    return render(request,'login.html',context)
