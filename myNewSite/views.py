@@ -5,6 +5,7 @@ from django.db.models import Sum
 from django.core.cache import cache
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import authenticate, login
+from django.urls import reverse
 
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
 from blog.models import Blog
@@ -53,9 +54,11 @@ def loginn(request):
     username = request.POST.get('username','')
     password = request.POST.get('password','')
     user = authenticate(request, username=username, password=password)
+    # 获取登陆前的页面
+    referer = request.META.get('HTTP_REFERER', reverse('home'))
     if user is not None:
         login(request, user)
-        return redirect('/')
+        return redirect(referer)
         # Redirect to a success page.
         ...
     else:
