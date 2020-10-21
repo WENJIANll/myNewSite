@@ -30,6 +30,8 @@ urlpatterns = [
     path('blog/',include('blog.urls')),
     path('login/',views.loginn,name='login'),
     path('comment/', include('comment.urls')),
+    path('register/', views.register,name='register'),
+
 
 ]
 
