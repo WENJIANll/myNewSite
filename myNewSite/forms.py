@@ -22,6 +22,7 @@ class LoginForm(forms.Form):
 
 # 注册
 class RegForm(forms.Form):
+    # attrs裏面是設置Css的屬性
     username = forms.CharField(label='用户名', 
                                max_length=30,
                                min_length=3,
