@@ -80,7 +80,7 @@ def blog_detail(request,blog_pk):
 
     # context['user'] = request.user
     response = render(request,'blog/blog_detail.html',context)
-
+    # print(context['comments'])
     response.set_cookie(read_cookie_key,'Ture',max_age=60) # cookie类似字典的东西
     return response
 
