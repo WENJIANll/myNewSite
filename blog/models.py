@@ -4,6 +4,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
 from ckeditor_uploader.fields import RichTextUploadingField
 from read_account.models import ReadNumExpand,ReadDetail
+from comment.models import Comment
 
 class BlogType(models.Model):
     type_name = models.CharField(max_length=15)
@@ -27,6 +28,15 @@ class Blog(models.Model,ReadNumExpand):
 
     class Meta:
         ordering = ['created_time']
+    
+    def get_comment_num(self):
+
+        blog_content_type = ContentType.objects.get_for_model(self)
+
+        comments = Comment.objects.filter(content_type=blog_content_type,object_id=self.pk)
+        L = len(comments)
+        return L
+
 
 '''
     def get_read_num(self):

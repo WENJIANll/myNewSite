@@ -22,6 +22,8 @@ def update_comment(request):
         comment.user = comment_form.cleaned_data['user']
         comment.text = comment_form.cleaned_data['text']
         comment.content_object = comment_form.cleaned_data['content_object']
+        print(comment.content_type)
+        print(comment.object_id)
 
 
         parent = comment_form.cleaned_data['parent']
@@ -30,6 +32,10 @@ def update_comment(request):
             comment.parent = parent
             comment.reply_to = parent.user
         comment.save()
+        
+    
+        # comments = Comment.objects.filter(content_type=comment.content_type,object_id=comment.object_id)
+        
 
         # 返回数据
         data['status'] = 'SUCCESS'
@@ -42,6 +48,7 @@ def update_comment(request):
             data['reply_to'] = ''
         data['pk'] = comment.pk
         data['root_pk'] = comment.root.pk if not comment.root is None else ''
+        # data['commens_nums'] = len(comments)
     else:
         #return render(request, 'error.html', {'message': comment_form.errors, 'redirect_to': referer})
         data['status'] = 'ERROR'

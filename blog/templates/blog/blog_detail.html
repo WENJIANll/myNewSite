@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}{{ blog.title }}{% endblock %}
 {% load staticfiles %}
+{% load commenttags %}
 {% block head-extends %}
     <link rel="stylesheet" href="{% static 'blog/blog.css' %}">
     <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script>
@@ -19,6 +20,9 @@
                     </li>
                     <li>发表日期： {{ blog.created_time|date:"Y-m-d h:n:s" }}</li>
                     <li>阅读（{{ blog.get_read_num }}）</li>
+                    <!-- <div id="comment_num"> -->
+                    <li>评论（{{ blog.get_comment_num }})</li>
+                    <!-- </div> -->
                 </ul>
                 <div class="blog-content">{{ blog.content |safe }}</div>
                 <div class="blog_more">
@@ -48,13 +52,18 @@
                         <form id="comment_form" action="{% url 'update_comment' %}" method="POST" style="overflow:hidden">
                             <label>{{ user.username }}，欢迎评论~</label>
                             <div id="reply_content_container" style="display:none;">
-                                <p>回复：</p>
+                                <p id="reply_title">回复：</p>
                                 <div id="reply_content"></div>
                             </div>
-                            {% csrf_token %}                            
+                            {% csrf_token %}  
+                            {% get_comment_form blog as comment_form %}                  
                             {% for field in comment_form %}
                                 {{ field }}
                             {% endfor %}
+                            <!-- 用模板标签实现了 之前comment_form是view中的detail方法返回的东西-->
+                            <!-- {% for field in comment_form %}
+                                {{ field }}
+                            {% endfor %} -->
                             <span id="comment_error" class="text-danger pull-left"></span>
                             <input type="submit" value="评论" class="btn btn-primary pull-right">
                         </form>
@@ -68,6 +77,8 @@
                 <div class="comment-area">
                     <h3 class="comment-area-title">评论列表</h3>
                     <div id="comment_list">
+                        <!-- 用模板标签实现了 -->
+                        {% get_comment_list blog as comments %}
                         {% for comment in comments %}
                             <div id="root_{{ comment.pk }}" class="comment">
                                 <span>{{ comment.user.username }}</span>
@@ -127,17 +138,23 @@
                         // 插入评论
                         var comment_html = '<div id="root_' + data['pk'] + '" class="comment"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')：</span><div id="comment_' + data['pk'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['pk'] + ');">回复</a></div>';
                         $("#comment_list").prepend(comment_html);
+                        
                     }else{ 
                         // 插入回复
                         var reply_html ='<div class="reply"><span>' + data['username'] + '</span><span> (' + data['comment_time'] + ')</span><span> 回复 </span><span>' + data['reply_to'] + '：</span><div id="comment_' + data['pk'] + '">' + data['text'] + '</div><a href="javascript:reply(' + data['pk'] + ');">回复</a></div>';
                         $("#root_" + data['root_pk']).append(reply_html);
                     }
-                    
+                    // var htmlhtml = '<li>评论（' + data['commens_nums'] + ')</li>';
+                    // $('#comment_num').remove();
+                    // $('#comment_num').append(htmlhtml);
+
                     // 清空编辑框的内容
                     CKEDITOR.instances['id_text'].setData('');
                     $('#reply_content_container').hide();
                     $('#reply_comment_id').val('0');
                     $('#no_comment').remove();
+                    $("#comment_error").text('评论成功');
+
                 }else{
                     // 显示错误信息
                     $("#comment_error").text(data['message']);
@@ -149,6 +166,19 @@
         });
         return false;
     });
+    // 处理时间，我现在没运用到页面上
+    function timeFormat(timestamp){
+        var datetime = new Date(timestamp * 1000);
+        var year = datetime.getFullYear();
+        var month = numFormat(datetime.getMonth() + 1);
+        var day = numFormat(datetime.getDate());
+        var hour = numFormat(datetime.getHours());
+        var minute = numFormat(datetime.getMinutes());
+        var second = numFormat(datetime.getSeconds());
+        return year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
+        }
+
+    // reply_comment_id 是从上面的点击回复的时候传进来的
     function reply(reply_comment_id){
         // 设置值
         $('#reply_comment_id').val(reply_comment_id);
