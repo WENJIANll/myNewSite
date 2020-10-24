@@ -31,11 +31,13 @@
                             {% endfor %}
                             <label ></label>
                                 
-                                <p>欢迎登陆本网站</p>
+                                <p>欢迎欢迎~~</p>
                             <label ></label>
                                 
-                                <p>之所以写欢迎登陆是我要是不写的话就显得登录框太扁了</p>
-                            <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
+                                <p>热烈欢迎!!</p>
+                            <span class=" text-danger">{{ login_form.non_field_errors }}</span>
+                            <div class="clearfix"></div>
+                            <a href="{% url 'forgot_password' %}" class="pull-left">密码我真的不小心给忘了</a>
                             <input type="submit" value="登录" class="btn btn-primary pull-right">
                         </form>
                     </div>
@@ -43,6 +45,7 @@
                 </div>
                 {% else %}
                 <span>未登录，跳转到首页...</span>
+                {% csrf_token %}
                 <script type="text/javascript">
                     window.location.href = '/';
                 </script>

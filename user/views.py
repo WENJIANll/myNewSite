@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.http import JsonResponse
-from .forms import LoginForm, RegForm,ChangeNicknameform,BindEmailForm
+from .forms import LoginForm, RegForm,ChangeNicknameform,BindEmailForm,Change_passwordForm,ForgotPasswordForm
 from .models import Profile
 
 
@@ -38,7 +38,7 @@ def login(request):
 
 def register(request):
     if request.method == 'POST':
-        reg_form = RegForm(request.POST)
+        reg_form = RegForm(request.POST,request=request)
         if reg_form.is_valid():
             username = reg_form.cleaned_data['username']
             email = reg_form.cleaned_data['email']
@@ -46,6 +46,7 @@ def register(request):
             # 创建用户
             user = User.objects.create_user(username, email, password)
             user.save()
+            del request.session['register_code']
             # 登录用户
             user = auth.authenticate(username=username, password=password)
             auth.login(request, user)
@@ -96,6 +97,7 @@ def bind_email(request):
             email = form.cleaned_data['email']
             request.user.email = email
             request.user.save()
+            del request.session['bindemailcode']
             return redirect(redirect_to)
     else:
         form =  BindEmailForm()
@@ -108,8 +110,10 @@ def bind_email(request):
     
     return render(request,'user/bind_email.html',context)
 
+# 这个是发送验证码按钮通用的校验方法
 def send_vertifycode(request):
     email = request.GET.get('email','')
+    send_type = request.GET.get('send_type','')
     data = {}
     if email != '':
         # 生成验证码
@@ -119,14 +123,14 @@ def send_vertifycode(request):
         if now - send_time < 30:
             data['status'] = 'ERROR'
         else:
-            request.session['bindemailcode'] = code
+            request.session[send_type] = code
             request.session['send_time'] = now
             print(code)
 
             # 发送邮件
             print(email)
             send_status = send_mail(
-                '##兴趣使然##',
+                '小破站的验证码',
                 '验证码：%s' % code,
                 '1305133324@qq.com',
                 [email],
@@ -141,3 +145,51 @@ def send_vertifycode(request):
     else:
         data['status'] = 'ERROR'
     return JsonResponse(data)
+
+def change_password(request):
+    redirect_to = request.GET.get('from', reverse('home'))
+
+    if request.method == 'POST':
+        form = Change_passwordForm(request.POST,request=request)
+        if form.is_valid() :
+            user = request.user
+            new_password = form.cleaned_data.get('new_password')
+            user.set_password(new_password)
+            user.save()
+            auth.logout(request)
+            return redirect(redirect_to)
+    else:
+        form = Change_passwordForm()
+    context = {}
+    context['page_title'] = '修改密码'
+    context['form_title'] = '修改密码'
+    context['submit_text'] = '修改'
+    context['form'] = form
+    context['return_back_url'] = redirect_to
+    
+    return render(request,'form.html',context)
+    
+def forgot_password(request):
+    redirect_to = reverse('login')
+    if request.method == 'POST':
+        form = ForgotPasswordForm(request.POST, request=request)
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            new_password = form.cleaned_data['new_password']
+            user = User.objects.get(email=email)
+            user.set_password(new_password)
+            user.save()
+            # 清除session
+            del request.session['forgot_password_code']
+            return redirect(redirect_to)
+    else:
+        form = ForgotPasswordForm()
+
+    context = {}
+    context['page_title'] = '重置密码'
+    context['form_title'] = '重置密码'
+    context['submit_text'] = '重置'
+    context['form'] = form
+    context['return_back_url'] = redirect_to
+    return render(request, 'user/forgot_password.html', context)
+
