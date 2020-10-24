@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
 from blog.models import Blog
-from .forms import LoginForm,RegForm
+from user.forms import LoginForm,RegForm
 
 
 # Create your views here.
@@ -51,7 +51,7 @@ def home(request):
     context['seven_hotdata']  = seven_hotdata
 
     return render(request,'home.html',context)
-
+'''
 def loginn(request):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
@@ -66,7 +66,8 @@ def loginn(request):
     context['login_form'] = login_form
     return render(request, 'login.html', context)
 
-    '''
+    
+    
     username = request.POST.get('username','')
     password = request.POST.get('password','')
     user = authenticate(request, username=username, password=password)
@@ -76,11 +77,11 @@ def loginn(request):
         login(request, user)
         return redirect(referer)
         # Redirect to a success page.
-        ...
+        
     else:
         # Return an 'invalid login' error message.
-        ...
-        return render(request,'error.html',{'message':'用户名或密码不正确'})'''
+        
+        return render(request,'error.html',{'message':'用户名或密码不正确'})
 
 def register(request):
     if request.method == 'POST':
@@ -102,4 +103,4 @@ def register(request):
     context = {}
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
-    
+    '''

@@ -7,7 +7,6 @@ class LoginForm(forms.Form):
                                widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'请输入用户名'}))
     password = forms.CharField(label='密码', 
                                widget=forms.PasswordInput(attrs={'class':'form-control', 'placeholder':'请输入密码'}))
-    # user = login_form.cleaned_data['user']
 
     def clean(self):
         username = self.cleaned_data['username']
@@ -20,9 +19,7 @@ class LoginForm(forms.Form):
             self.cleaned_data['user'] = user
         return self.cleaned_data
 
-# 注册
 class RegForm(forms.Form):
-    # attrs裏面是設置Css的屬性
     username = forms.CharField(label='用户名', 
                                max_length=30,
                                min_length=3,
