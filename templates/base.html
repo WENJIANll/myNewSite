@@ -45,7 +45,11 @@
                             <a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
                         </li>
                     {% else %}
+                        {% if user.has_nickname %}
+                        <li><a>{{ user.username }}({{user.get_nickname}})</a></li>
+                        {% else %}
                         <li><a>{{ user.username }}</a></li>
+                        {% endif %}
                         
                         <li><a href="{% url 'user_info' %}">个人资料</a></li>
                         <li><a href="{% url 'admin:index' %}">后台管理</a></li>
@@ -106,7 +110,7 @@
     </script>
     
     
-    {% block script_extends %}{% endblock %}
+{% block script_extends %}{% endblock %}
 
 
 </body>
