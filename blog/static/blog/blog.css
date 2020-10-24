@@ -36,7 +36,7 @@ h3.comment-area-title {
     padding-bottom: 0.4em;
 }
 div.django-ckeditor-widget {
-    width: 60%;
+    width: 100%;
 }
 div.comment {
     border-bottom: 1px dashed #ccc;
