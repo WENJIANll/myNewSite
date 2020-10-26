@@ -10,7 +10,7 @@ from django.utils import timezone
 class ReadNum(models.Model):
     read_num = models.IntegerField(default=0)
     # 外键模型
-    content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     # 记录对应模型的主键值
     object_id = models.PositiveIntegerField()
     # 将上面两个变为通用的外键

@@ -57,3 +57,6 @@ p#reply_title {
     border-bottom: 1px dashed #ccc;
     padding-bottom: 0.5em;
 }
+div.like .active{
+    color: #f22;
+}

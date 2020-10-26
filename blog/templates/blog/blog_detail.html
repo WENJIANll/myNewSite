@@ -27,9 +27,15 @@
                     <!-- <div id="comment_num"> -->
                     <li>评论（{{ blog.get_comment_num }})</li>
                     <!-- </div> -->
+                    
+                   
                 </ul>
                 <div class="blog-content">{{ blog.content |safe }}</div>
-                
+                <div class="like" onclick="setlike(this, '{% get_content_type blog %}', {{ blog.pk }})">
+                    <span class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}"></span>
+                    <span class="likesnum">{% get_like_count blog %}</span>
+                    <span>喜欢</span>
+                </div>
                 <div class="blog_more">
                     <p>上一篇：
                         {% if previous_blog %}
@@ -84,11 +90,16 @@
                         <!-- 用模板标签实现了 -->
                         {% get_comment_list blog as comments %}
                         {% for comment in comments %}
+                        
                             <div id="root_{{ comment.pk }}" class="comment">
                                 <span>{{ comment.user.get_nickname_or_username }}</span>
                                 <span>({{ comment.comment_time|date:"Y-m-d H:i:s" }})：</span>
                                 <div id="comment_{{ comment.pk }}">
                                     {{ comment.text|safe }}
+                                </div>
+                                <div class="like" onclick="setlike(this, '{% get_content_type comment %}', {{ comment.pk }})">
+                                    <span class="glyphicon glyphicon-thumbs-up {% get_like_status comment %}"></span>
+                                    <span class="likesnum">{% get_like_count comment %}</span>
                                 </div>
                                 <a href="javascript:reply({{ comment.pk }});">回复</a>
 
@@ -101,6 +112,10 @@
                                         <span>{{ reply.reply_to.get_nickname_or_username }}：</span>
                                         <div id="comment_{{ reply.pk }}">
                                             {{ reply.text|safe }}
+                                        </div>
+                                        <div class="like" onclick="setlike(this, '{% get_content_type reply %}', {{ reply.pk }})">
+                                            <span class="glyphicon glyphicon-thumbs-up {% get_like_status reply %}"></span>
+                                            <span class="likesnum">{% get_like_count reply %}</span>
                                         </div>
                                         <a href="javascript:reply({{ reply.pk }});">回复</a>
                                     </div>                                    
@@ -118,6 +133,50 @@
 
 {% block script_extends %}
 <script type="text/javascript">
+    function setlike(obj,ct,blogpk){
+        $.ajax({
+            url:"{% url 'set_likes' %}",
+            type:'GET',
+            data:{ 'ct':ct,
+                'objid':blogpk
+             },
+            // 因为请求的是同一个链接，所以会有缓存的情况
+            cache:false,
+            success: function(data){
+                console.log(data)
+                if(data['status']=='SUCCESS'){
+                    // 更新点赞状态
+                    var element = $(obj.getElementsByClassName('glyphicon'));
+                    if (data['active']=='active'){
+                        element.addClass("active");
+                    }else{
+                        element.removeClass("active");
+                    }
+                    // // 更新点赞数量
+                    var element2 = $(obj.getElementsByClassName('likesnum'));
+                    element2.text(data['numbers']);
+                }                
+            }
+        })
+    }
+    // $("#bloglikebnt").submit(function(blogpk){
+        // $.ajax({
+        //     url:"{% url 'set_likes' %}",
+        //     type:'GET',
+        //     data:{ 'ct':'blog',
+        //         'objid':blogpk
+        //      },
+        //     // 因为请求的是同一个链接，所以会有缓存的情况
+        //     cache:false,
+        //     success: function(data){
+        //         console.log(data);
+        //         if(data['status']=='SECCESS'){
+                       
+        //         }                    
+        //     }
+        // })
+    // })
+
     $("#comment_form").submit(function(){
         // 判断是否为空
         $("#comment_error").text('');

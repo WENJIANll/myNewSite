@@ -7,7 +7,7 @@ from django.contrib.contenttypes.models import ContentType
 from read_account.models import ReadNum
 from .models import Blog,BlogType
 from read_account.utils import read_account_once
-from comment.models import Comment 
+from comment.models import Comment ,Likes,Likes_count
 from comment.forms import CommentForm
 
 # Create your views here.
@@ -73,9 +73,12 @@ def blog_detail(request,blog_pk):
     # 这个使用模板标签get_comment_list实现了
     # comments = Comment.objects.filter(content_type=blog_content_type,object_id=blog.pk,parent=None)
 
+    likecount = Likes_count.objects.get(content_type=blog_content_type,object_id=blog_pk)
+
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
     context['blog'] = blog
+    context['likesnum'] = likecount.like_count
     # context['comments'] = comments
     # 这个使用模板标签get_comment_form实现了
     # context['comment_form'] = CommentForm(initial={'content_type': blog_content_type.model, 'object_id': blog_pk,'reply_comment_id':0})

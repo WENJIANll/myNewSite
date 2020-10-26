@@ -3,7 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.http import JsonResponse
 
-from .models import Comment
+from .models import Comment,Likes,Likes_count
 from .forms import CommentForm
 
 
@@ -53,6 +53,38 @@ def update_comment(request):
         #return render(request, 'error.html', {'message': comment_form.errors, 'redirect_to': referer})
         data['status'] = 'ERROR'
         data['message'] = list(comment_form.errors.values())[0][0]
+    return JsonResponse(data)
+
+
+def set_likes(request):
+    data = {}
+    # 获取数据
+    ct = request.GET.get('ct')
+    ct = ContentType.objects.get(model=ct)
+    objid = int(request.GET.get('objid'))
+    user = request.user
+
+    # 存在就是要取消点赞，不存在就是进行点赞操作
+    if Likes.objects.filter(content_type=ct,object_id=objid,usermakelike=user).exists():
+        # 取消点赞
+        # get出那条记录，删掉
+        like = Likes.objects.get(content_type=ct,object_id=objid,usermakelike=user)
+        like.delete()
+        likes_count,created = Likes_count.objects.get_or_create(content_type=ct,object_id=objid)
+        likes_count.like_count = likes_count.like_count - 1
+        likes_count.save()
+        data['active'] = ''
+    else:
+    # 点赞
+        like = Likes(content_type=ct,object_id=objid,usermakelike=user)
+        like.save()
+        likes_count,created = Likes_count.objects.get_or_create(content_type=ct,object_id=objid)
+        likes_count.like_count = likes_count.like_count + 1
+        likes_count.save()
+        data['active'] = 'active'
+
+    data['status'] = 'SUCCESS'
+    data['numbers'] = likes_count.like_count
     return JsonResponse(data)
 
 '''def update_comment(request):
