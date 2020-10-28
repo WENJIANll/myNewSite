@@ -159,23 +159,7 @@
             }
         })
     }
-    // $("#bloglikebnt").submit(function(blogpk){
-        // $.ajax({
-        //     url:"{% url 'set_likes' %}",
-        //     type:'GET',
-        //     data:{ 'ct':'blog',
-        //         'objid':blogpk
-        //      },
-        //     // 因为请求的是同一个链接，所以会有缓存的情况
-        //     cache:false,
-        //     success: function(data){
-        //         console.log(data);
-        //         if(data['status']=='SECCESS'){
-                       
-        //         }                    
-        //     }
-        // })
-    // })
+
 
     $("#comment_form").submit(function(){
         // 判断是否为空
@@ -255,4 +239,21 @@
     }
 </script>
 {% endblock %}
+<!-- // $("#bloglikebnt").submit(function(blogpk){
+    // $.ajax({
+    //     url:"{% url 'set_likes' %}",
+    //     type:'GET',
+    //     data:{ 'ct':'blog',
+    //         'objid':blogpk
+    //      },
+    //     // 因为请求的是同一个链接，所以会有缓存的情况
+    //     cache:false,
+    //     success: function(data){
+    //         console.log(data);
+    //         if(data['status']=='SECCESS'){
+                   
+    //         }                    
+    //     }
+    // })
+// }) -->
 
