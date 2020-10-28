@@ -73,12 +73,16 @@ def blog_detail(request,blog_pk):
     # 这个使用模板标签get_comment_list实现了
     # comments = Comment.objects.filter(content_type=blog_content_type,object_id=blog.pk,parent=None)
 
-    likecount = Likes_count.objects.get(content_type=blog_content_type,object_id=blog_pk)
-
+    if Likes_count.objects.filter(content_type=blog_content_type,object_id=blog_pk):
+        likecount = Likes_count.objects.get(content_type=blog_content_type,object_id=blog_pk)
+        likesnum = likecount.like_count
+    else:
+        likesnum = 0
+    
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
     context['blog'] = blog
-    context['likesnum'] = likecount.like_count
+    context['likesnum'] = likesnum
     # context['comments'] = comments
     # 这个使用模板标签get_comment_form实现了
     # context['comment_form'] = CommentForm(initial={'content_type': blog_content_type.model, 'object_id': blog_pk,'reply_comment_id':0})
