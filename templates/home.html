@@ -13,73 +13,27 @@
 {% block nav_home_active %} active {% endblock %}
 
 {% block content %}
-    <h1 class="home-content">欢迎访问我的网站,随便看</h1>
-     <!-- 图表容器 DOM -->
-    <div id="container" ></div>
-    <!-- remenblog -->
-    <div class="hot-data">
-        <h3>今天热门</h3>
-        <ul>
-            {% for hot_Data in today_hot_data %}
-                <li><a href="{% url 'blog_detail' hot_Data.content_object.pk %}">{{  hot_Data.content_object.title }}</a>({{ hot_Data.read_num }})</li>
-            {% empty %}
-                <li>今天暂无</li>
-            {%  endfor %}
-        </ul>
-    </div>
-    <div class="hot-data">
-        <h3>昨天热门</h3>
-        <ul>
-            {% for hot_Data in yes_hot_data %}
-                <!-- 为什么这里的title可以点出来 然而7天的点不出来-->
-                <li><a href="{% url 'blog_detail' hot_Data.content_object.pk %}">{{  hot_Data.content_object.title }}</a>({{ hot_Data.read_num }})</li>
-            {% empty %}
-                <li>暂无</li>
-            {%  endfor %}
-        </ul>
-    </div>
-    <div class="hot-data">
-        <h3>7天内热门</h3>
-        <ul>
-            {% for hot_blog in seven_hotdata %}
-                <li><a href="{% url 'blog_detail' hot_blog.id %}">{{hot_blog.title}}</a>({{ hot_blog.read_group_num }})</li>
-            {% empty %}
-                <li>暂无</li>
-            {%  endfor %}
-        </ul>
-    </div>
-
-    <script>
-            var options = {
-            chart: {type: 'line' }, //指定图表的类型，默认是折线图（line）
-            title: {text: null},
-            xAxis: {
-                categories: {{ dates|safe }},
-                tickmarkPlacement: 'on',
-                title: { text: '前7天阅读量变化'}
-              },
-            yAxis: {
-                title: { text: null  }, // y 轴标题 
-                labels:{enabled: false},
-                gridLineDashStyle: 'Dash'
-            },
-            series: [{                              // 数据列
-                name: '阅读量',                      // 数据列名
-                data: {{ read_nums }}, // 数据
-            }],
-            plotOptions: {
-                line: {
-                    dataLabels: {
-                        enabled: true
-                    }
-                }
-            },
-            legend: {enabled: false},
-            credits:{enabled: false},
-        };
-            // 图表初始化函数
-            var chart = Highcharts.chart('container', options);
-    </script>
 
 
+<header class="home container-fluid">
+    <div class="row">
+        <div class="ta-center">
+            <span>Choose > your life</span>
+            <!-- <span>The future guides you now</span> -->
+                <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn</a></p>
+            </span>
+        </div>
+        <div></div>
+    </div>
+</header>
+
+<!-- <div class="col-xs-12 col-md-8" id="home" >
+    <div class="jumbotron row">
+        <div class="ta-center col-xs-12 col-md-8">
+            <h1 >Hello, world!</h1>
+            <p>...</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
+    </div> -->
 {% endblock %}
