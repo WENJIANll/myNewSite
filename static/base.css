@@ -13,3 +13,17 @@ div.nav a.logo {
     display: inline-block;
     font-size: 120%; 
 }
+p#logo{
+    height: 35px;
+    width: 38px;
+    background-image: url(./logo1.JPG);
+    float: left;
+    text-align: center;
+    margin: 0;
+}
+a#logo2{
+    height: 35px;
+    width: 125px;
+    float: left;
+    margin: 0;
+}
