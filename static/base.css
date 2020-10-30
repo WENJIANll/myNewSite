@@ -28,3 +28,6 @@ a#logo2{
     margin: 0;
     color: #000;
 }
+a{
+    text-decoration:none;
+}

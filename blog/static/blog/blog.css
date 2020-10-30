@@ -6,13 +6,12 @@ div.blog:not(:last-child){
     padding-bottom: 1em;
     border-bottom: 1px solid #eee;
 }
-div.blog h3{
+div.blog h4{
     margin-top: 0.5em;
 }
 div.blog p.blog-info{
     margin-bottom: 0;
 }
-
 ul.blog-info-description{
     list-style-type: none;
     margin-bottom: 2em;
@@ -66,3 +65,17 @@ div.like {
     display: inline-block;
     padding: 0.5em 0.3em;
 }
+div#timetime{
+    width: 100px;
+}
+div#tagtag{
+    width: 80px;
+}
+#atag>a{
+    text-decoration:none;
+}
+
+div#tagtag>a{
+    text-decoration:none;
+}
+

@@ -19,10 +19,11 @@
                         </div>
                         {% for blog in blogs %}
                         <div class="blog">
-                                <h3><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h3>       
+                                <h4 id="atag"><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h4>       
                             <p class="blog-info">
-                                分类：<a href="{% url 'blogs_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a>
-                                发表日期：{{ blog.created_time|date:"Y-m-d" }}
+                                <div id="tagtag" class="glyphicon glyphicon-tags"><a href="{% url 'blogs_with_type' blog.blog_type.pk %}"> {{ blog.blog_type }}</a></div>
+                                
+                                <div id="timetime" class="glyphicon glyphicon-time">{{ blog.created_time|date:"Y-m-d" }}</div>
                                 阅读（{{ blog.get_read_num }}）
                                 评论数（{{ blog.get_comment_num }}）
                             </p>
@@ -39,7 +40,7 @@
                 <div>                
                     <ul class="pagination">
                         <li>
-                            {% if page_of_blogs.has_provious %}
+                            {% if page_of_blogs.has_previous %}
                             <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
@@ -61,7 +62,7 @@
                             {% endfor %}
 
                         <li>
-                            {% if page_of_blogs.has_provious %}
+                            {% if page_of_blogs.has_next %}
                             <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
@@ -81,7 +82,7 @@
                     <div class="panel-body">
                         <ul class="blog-types">
                             {% for blog_type in blog_types %}
-                            <li>
+                            <li id="atag">
                                 <a href="{% url 'blogs_with_type' blog_type.pk %}">
                                     {{ blog_type.type_name }} ({{ blog_type.blog_count }})
                                 </a> 
@@ -97,7 +98,7 @@
                     <div class="panel-body">
                         <ul>
                             {% for datee,blog_count in blog_dates.items %}
-                            <li><a href="{% url 'blogs_with_date' datee.year datee.month %}">{{ datee |date:"Y年m月"}}({{blog_count}})</a></li>
+                            <li id="atag"><a href="{% url 'blogs_with_date' datee.year datee.month %}">{{ datee |date:"Y年m月"}}({{blog_count}})</a></li>
                             {% endfor %}
 
                         </ul>
