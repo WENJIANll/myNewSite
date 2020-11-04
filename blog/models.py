@@ -8,6 +8,8 @@ from comment.models import Comment
 
 class BlogType(models.Model):
     type_name = models.CharField(max_length=15)
+    desc = RichTextUploadingField(default='正在想')
+
     """docstring for BlogType"""
     def __str__(self):
     	return self.type_name

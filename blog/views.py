@@ -60,6 +60,7 @@ def get_blog_list_commoninfo(request,blogs_all_list):
 def blog_list(request):
     blogs_all_list = Blog.objects.all()
     context = get_blog_list_commoninfo(request,blogs_all_list)
+
     return render(request,'blog/blog_list.html',context)
 
 def blog_detail(request,blog_pk):
@@ -77,10 +78,12 @@ def blog_detail(request,blog_pk):
         likesnum = likecount.like_count
     else:
         likesnum = 0
-    
+    blogs_all_list = Blog.objects.filter(blog_type=blog.blog_type)
+
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
     context['blog'] = blog
+    context['blogs_all_list'] = blogs_all_list  
     context['likesnum'] = likesnum
     # context['comments'] = comments
     # 这个使用模板标签get_comment_form实现了
@@ -93,9 +96,12 @@ def blog_detail(request,blog_pk):
     return response
 
 def blogs_with_type(request,blog_type_pk):
-    blog_type = get_object_or_404(BlogType,pk=blog_type_pk)# 获取页面url传过来的分类
+    blog_type = get_object_or_404(BlogType,pk=blog_type_pk)# 获取s
+    # 页面url传过来的分类
     blogs_all_list = Blog.objects.filter(blog_type=blog_type)
-    context = get_blog_list_commoninfo(request,blogs_all_list)
+    # context = get_blog_list_commoninfo(request,blogs_all_list)
+    context = {}
+    context['blogs_all_list'] = blogs_all_list  
     context['blog_type'] = blog_type  
     return render(request,'blog/blogs_with_type.html',context)
 
