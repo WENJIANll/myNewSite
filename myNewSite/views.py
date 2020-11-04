@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
-from blog.models import Blog
+from blog.models import Blog,BlogType
 from user.forms import LoginForm,RegForm
 
 
@@ -40,13 +40,13 @@ def home(request):
         cache.set('seven_hotdata',seven_hotdata,3600)
         print('jisuan cach')
     else:
-        print('shiyong cach')
-
+        pass
     context = {}
     context['dates'] = dates
     context['read_nums'] = read_nums
     context['today_hot_data']  = today_hot_data
     context['yes_hot_data']  = yes_hot_data
+
     # context['seven_hotdata']  = seven_hotdata
     context['seven_hotdata']  = seven_hotdata
 
@@ -104,3 +104,4 @@ def register(request):
     context['reg_form'] = reg_form
     return render(request, 'register.html', context)
     '''
+
