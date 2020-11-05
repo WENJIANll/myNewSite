@@ -40,9 +40,11 @@
                         </ul>
                         <div class="blog-content">{{ blog.content |safe }}</div>
                         <div class="like" onclick="setlike(this, '{% get_content_type blog %}', {{ blog.pk }})">
-                            <span class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}"></span>
-                            <span class="likesnum">{% get_like_count blog %}</span>
-                            <span>喜欢</span>
+                            <button type="button" class="btn" style=" margin-top: 2em;">
+                                <span class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}"></span>
+                                <span class="likesnum">{% get_like_count blog %}</span>
+                                <span>喜欢</span>
+                            </button>
                         </div>
                     </div>
                 </div>
