@@ -30,20 +30,18 @@
                         <div class="panel-heading">
                             <h3>{{ blog.title }}</h3>
                             <ul class="blog-info-description">
-                                <li>作者： {{ blog.author }}</li>
-                                <li id="atag">分类：
-                                    <a href="{% url 'blogs_with_type' blog.blog_type.pk %}">{{ blog.blog_type }}</a> 
-                                </li>
-                                <li>发表日期： {{ blog.created_time|date:"Y-m-d h:n:s" }}</li>
-                                <li>阅读（{{ blog.get_read_num }}）</li>
-                                <li>评论（{{ blog.get_comment_num }})</li>
+                                <li class="glyphicon glyphicon-user">-作者:{{ blog.author }}</li>
+                                <li id="atag" class="glyphicon glyphicon-book">-分类:<a href="{% url 'blogs_with_type' blog.blog_type.pk %}" >{{ blog.blog_type }}</a></li>
+                                <li>发表日期: {{ blog.created_time|date:"Y-m-d h:n:s" }}</li>
+                                <li class="glyphicon glyphicon-eye-open">-阅读({{ blog.get_read_num }})</li>
+                                <li>评论({{ blog.get_comment_num }})</li>
                             </ul>
                         </div>  
                         <div class="panel-body">
                             <div class="blog-content">{{ blog.content |safe }}</div>
                             <div class="like" onclick="setlike(this, '{% get_content_type blog %}', {{ blog.pk }})">
                                 <button type="button" class="btn" style=" margin-top: 2em;">
-                                    <span class="glyphicon glyphicon-thumbs-up {% get_like_status blog %}"></span>
+                                    <span class="glyphicon glyphicon-heart {% get_like_status blog %}" style="margin-right: 0.5em;"></span>
                                     <span class="likesnum">{% get_like_count blog %}</span>
                                     <span>喜欢</span>
                                 </button>
