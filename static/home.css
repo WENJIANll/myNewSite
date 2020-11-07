@@ -1,21 +1,4 @@
-div#home{
-    height: 800px;
-    width: 2000px;
-    background-color: #ffcf10;;
-    margin-top: -10;
-    padding-top: 100;
-}
-.jumbotron {
-    padding-top: 48px;
-    padding-bottom: 48px;
-}
-.jumbotron {
-    padding-top: 30px;
-    padding-bottom: 30px;
-    margin-bottom: 30px;
-    color: inherit;
-    background-color:#ffcf10;;
-}
+
 .ta-center {
     text-align: center;
     font-size: 55px;
@@ -25,18 +8,20 @@ div#home{
     margin-top: 2.5em;
 }
 header{
-    height: 100px;
+    height: 300px;
     position: relative;
     top: -22px;
     left: 0px;
-    background-color:#ffcf10;;
+    background-color:#2b3137;;
 
     /* background-image: url(./home1.jpg) ; */
     /* background-size: cover; */
 }
 .home{
-    height: 430px;
+    height: 580px;
 }
 #wenzi{
     font-size: 35px;
+    color: white;
+    margin-top: 5em;
 }
