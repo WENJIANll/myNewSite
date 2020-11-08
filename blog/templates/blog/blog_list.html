@@ -42,10 +42,43 @@
                     <div class="panel-heading" style="background-color: white;">目录</div>
                     <div class="panel-body">
                         <ul>
-                            {% for blogtitle in blogs_all_list %}
+                            {% for blogtitle in blogs %}
                             <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}">{{ blogtitle.title }}</a></li>
                             {% endfor %}
 
+                        </ul>
+                        <ul class="pagination">
+                            <li>
+                                {% if page_of_blogs.has_previous %}
+                                <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                                {% else %}
+                                <span aria-hidden="true">&laquo;</span>
+                                {% endif %}
+                            </li>
+                                {# 全部页码 #}
+                                {% for page_num in page_range %}
+                                    {% if page_num == page_of_blogs.number %}
+                                    <li class="active"><span>{{ page_num }}</span></li>
+                                    {% else %}
+                                        {% if page_num == '...' %}
+                                        <li><span>{{ page_num }}</span></li>
+                                        {% else %}
+                                        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+    
+                            <li>
+                                {% if page_of_blogs.has_next %}
+                                <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                                {% else %}
+                                <span aria-hidden="true">&laquo;</span>
+                                {% endif %}
+                            </li>    
                         </ul>
                     </div>
                 </div>
@@ -84,39 +117,7 @@
                     </div>
                 </div> -->
                 <!-- <div>                
-                    <ul class="pagination">
-                        <li>
-                            {% if page_of_blogs.has_previous %}
-                            <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                            {% else %}
-                            <span aria-hidden="true">&laquo;</span>
-                            {% endif %}
-                        </li>
-                            {# 全部页码 #}
-                            {% for page_num in page_range %}
-                                {% if page_num == page_of_blogs.number %}
-                                <li class="active"><span>{{ page_num }}</span></li>
-                                {% else %}
-                                    {% if page_num == '...' %}
-                                    <li><span>{{ page_num }}</span></li>
-                                    {% else %}
-                                    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
-                                    {% endif %}
-                                {% endif %}
-                            {% endfor %}
-
-                        <li>
-                            {% if page_of_blogs.has_next %}
-                            <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                            {% else %}
-                            <span aria-hidden="true">&laquo;</span>
-                            {% endif %}
-                        </li>    
-                    </ul>
+                    
                     <p>
                         (本网站一共{{ page_of_blogs.paginator.count }}篇博客) 
                     </p>

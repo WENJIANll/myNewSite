@@ -79,11 +79,10 @@ def blog_detail(request,blog_pk):
     else:
         likesnum = 0
     blogs_all_list = Blog.objects.filter(blog_type=blog.blog_type)
-
+    context = get_blog_list_commoninfo(request,blogs_all_list)
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time,blog_type=blog.blog_type).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time,blog_type=blog.blog_type).first()
     context['blog'] = blog
-    context['blogs_all_list'] = blogs_all_list  
     context['likesnum'] = likesnum
     # context['comments'] = comments
     # 这个使用模板标签get_comment_form实现了
@@ -101,7 +100,7 @@ def blogs_with_type(request,blog_type_pk):
     blogs_all_list = Blog.objects.filter(blog_type=blog_type)
     # context = get_blog_list_commoninfo(request,blogs_all_list)
     context = {}
-    context['blogs_all_list'] = blogs_all_list  
+    context = get_blog_list_commoninfo(request,blogs_all_list)
     context['blog_type'] = blog_type  
     return render(request,'blog/blogs_with_type.html',context)
 
