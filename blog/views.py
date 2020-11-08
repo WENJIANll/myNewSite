@@ -55,6 +55,7 @@ def get_blog_list_commoninfo(request,blogs_all_list):
     # context['blogs_count'] = Blog.objects.all().count()
     context['blog_types'] = blog_type_list
     context['blog_dates'] = blog_dates_dict
+    context['page_currn_num'] = page_num
     return context
 
 def blog_list(request):

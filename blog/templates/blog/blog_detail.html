@@ -17,7 +17,7 @@
                     <div class="panel-body">
                         <ul>
                             {% for blogtitle in blogs %}
-                            <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}">{{ blogtitle.title }}</a></li>
+                            <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">{{ blogtitle.title }}</a></li>
                             {% endfor %}
                         </ul>
                         <ul class="pagination" >
