@@ -80,8 +80,8 @@ def blog_detail(request,blog_pk):
         likesnum = 0
     blogs_all_list = Blog.objects.filter(blog_type=blog.blog_type)
 
-    context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time).last()
-    context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time).first()
+    context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time,blog_type=blog.blog_type).last()
+    context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time,blog_type=blog.blog_type).first()
     context['blog'] = blog
     context['blogs_all_list'] = blogs_all_list  
     context['likesnum'] = likesnum
