@@ -2,13 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
+from mdeditor.fields import MDTextField
 from ckeditor_uploader.fields import RichTextUploadingField
 from read_account.models import ReadNumExpand,ReadDetail
 from comment.models import Comment
 
 class BlogType(models.Model):
     type_name = models.CharField(max_length=15)
-    desc = RichTextUploadingField(default='正在想')
+    desc = MDTextField(default='正在想')
 
     """docstring for BlogType"""
     def __str__(self):
@@ -17,7 +18,7 @@ class BlogType(models.Model):
 class Blog(models.Model,ReadNumExpand):
     title = models.CharField(max_length=50)
     blog_type = models.ForeignKey(BlogType,on_delete=models.CASCADE,related_name = 'blog_blog')
-    content = RichTextUploadingField()
+    content = MDTextField()
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     read_details = GenericRelation(ReadDetail)
     # readed_num = models.IntegerField(default=0)

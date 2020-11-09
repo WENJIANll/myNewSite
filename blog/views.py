@@ -1,3 +1,4 @@
+import markdown
 from django.shortcuts import render,get_object_or_404
 from django.conf import settings
 from django.db.models import Count
@@ -83,7 +84,13 @@ def blog_detail(request,blog_pk):
     context = get_blog_list_commoninfo(request,blogs_all_list)
     context['previous_blog'] = Blog.objects.filter(created_time__lt=blog.created_time,blog_type=blog.blog_type).last()
     context['next_blog'] = Blog.objects.filter(created_time__gt=blog.created_time,blog_type=blog.blog_type).first()
-    context['blog'] = blog
+    context['blog'] = blog  
+    context['blog_content'] = markdown.markdown(blog.content,
+                                  extensions=[
+                                     'markdown.extensions.extra',
+                                     'markdown.extensions.codehilite',
+                                     'markdown.extensions.toc',
+                                  ])
     context['likesnum'] = likesnum
     # context['comments'] = comments
     # 这个使用模板标签get_comment_form实现了
