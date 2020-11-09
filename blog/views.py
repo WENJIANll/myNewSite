@@ -110,6 +110,12 @@ def blogs_with_type(request,blog_type_pk):
     context = {}
     context = get_blog_list_commoninfo(request,blogs_all_list)
     context['blog_type'] = blog_type  
+    context['blog_type_desc'] = markdown.markdown(blog_type.desc,
+                                  extensions=[
+                                     'markdown.extensions.extra',
+                                     'markdown.extensions.codehilite',
+                                     'markdown.extensions.toc',
+                                  ])
     return render(request,'blog/blogs_with_type.html',context)
 
 def blogs_with_date(request,year,month):

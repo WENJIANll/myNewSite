@@ -5,6 +5,8 @@
 {% load staticfiles %}
 {% block head-extends %}
     <link rel="stylesheet" href="{% static 'blog/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
+    <link rel="stylesheet" href="{% static 'default.css' %}"/>
 {% endblock %}
 
 {% block content %}
@@ -87,7 +89,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">描述</div>
                     <div class="panel-body">
-                        {{ blog_type.desc | safe}}
+                        {{ blog_type_desc | safe}}
                     </div>
                 </div>
                 <!-- <div class="panel panel-default">
