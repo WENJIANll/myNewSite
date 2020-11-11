@@ -12,10 +12,10 @@ from comment.models import Comment ,Likes,Likes_count
 from comment.forms import CommentForm
 
 # Create your views here.
-
+# 分页器
 def get_blog_list_commoninfo(request,blogs_all_list):
     context = {}
-    paginator = Paginator(blogs_all_list,settings.EACH_PAGE_BLOGS_NUMBER) # 每3页分一页
+    paginator = Paginator(blogs_all_list,settings.EACH_PAGE_BLOGS_NUMBER) # 每几页分一页
     page_num =  request.GET.get('page',1) # 获取页码参数（GET请求）
     page_of_blogs = paginator.get_page(page_num) #获取当前page页的数据，getpage这个方法已经把page_num是不是整形考虑倒了
     curent_page_num = page_of_blogs.number
