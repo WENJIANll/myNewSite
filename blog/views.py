@@ -19,7 +19,8 @@ def get_blog_list_commoninfo(request,blogs_all_list):
     page_num =  request.GET.get('page',1) # 获取页码参数（GET请求）
     page_of_blogs = paginator.get_page(page_num) #获取当前page页的数据，getpage这个方法已经把page_num是不是整形考虑倒了
     curent_page_num = page_of_blogs.number
-    # 列表生成器生成左右的共五个页码
+    # 列表生成器生成当前页码前后2个的共五个页码
+    # 就是只在页面显示最多五个页码，，如果加上首和尾就是7个。还有...那就9个
     page_range = [i for i in range(curent_page_num-2, curent_page_num+3) if i > 0 and (i <= paginator.num_pages)] 
     # 加上省略号 这里的2就是上面列表生成器上的2
     if page_range[0] -1 >= 2:
@@ -31,6 +32,7 @@ def get_blog_list_commoninfo(request,blogs_all_list):
         page_range.insert(0,1)
     if page_range[-1] != paginator.num_pages:
         page_range.append(paginator.num_pages)
+
     # 获取博客的分类和对应的数量
     # 下面的blog_blog是models里面写的
     blog_type_list = BlogType.objects.annotate(blog_count = Count('blog_blog'))
@@ -41,6 +43,7 @@ def get_blog_list_commoninfo(request,blogs_all_list):
         blog_type.blog_count = Blog.objects.filter(blog_type=blog_type).count()
         blog_type_list.append(blog_type)
     '''
+
     # 获取日期对应的博客数量
     # dates()这个方法，第一个参数是字段，第二个是类型，第三个是按什么顺序
     # retrun一个queryset
