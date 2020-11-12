@@ -23,16 +23,19 @@ p#logo{
 }
 a#logo2{
     height: 35px;
-    width: 125px;
+    width: 175px;
     float: left;
     margin: 0;
     color: #000;
+    font-size: x-large;
+    font-family:arial, sans-serif; ;
+
 }
 a{
     text-decoration:none;
 }
 div.container{
-    width: 97%;
+    width: 67%;
 }
 /* ul.pagination{
     text-align: center;
