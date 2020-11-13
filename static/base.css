@@ -29,7 +29,9 @@ a#logo2{
     color: #000;
     font-size: x-large;
     font-family:arial, sans-serif; ;
-
+}
+ul.navbar-right>li>a{
+    color: #000;
 }
 a{
     text-decoration:none;
