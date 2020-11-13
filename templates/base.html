@@ -1,102 +1,103 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+  <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {# 响应式各种屏幕 #}
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        {# 响应式各种屏幕 #}
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet"  href="/static/base.css">
-    <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
-    <link rel="stylesheet"  href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
-    
-    {% block head-extends %}{% endblock %}
-</head>
+      <title>{% block title %}{% endblock %}</title>
+      <link rel="stylesheet"  href="/static/base.css">
+      <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
+      <link rel="stylesheet"  href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
+      <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+        
+      {% block head-extends %}{% endblock %}
+  </head>
 <body>
   
     <div class="container-fluid" style="height:2px; background-color:#f48024"></div>
-    <nav class="navbar navbar-default" style="height: 4em;">
-        <div class="container" >
-          <!-- Brand and toggle get grouped for better mobile display -->
+
+    <nav class="navbar navbar-default" >
+      <div class="container" >
+        <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-              </button>
-            
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+              
             <span id="baselogo">
               <p id="logo"></p>
               <a class="navbar-brand" id="logo2" href="{% url 'home' %}" >兴趣使然</a>
             </span>
-            
+              
           </div>
-      
+     
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-              <ul class="nav navbar-nav">
-                <!-- <li><a href="{% url 'home' %}">首页</a></li> -->
-                <!-- <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
-                  <ul class="dropdown-menu"> -->
-                
-                    <!-- <li><a href="#">Linux</a></li>
-                    <li><a href="#">Leetcode</a></li>
-                    <li><a href="#">计算机网络</a></li>
-                    <li><a href="#">建站历程</a></li> -->
+            <ul class="nav navbar-nav">
+                  <!-- <li><a href="{% url 'home' %}">首页</a></li> -->
+                  <!-- <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">分类 <span class="caret"></span></a>
+                    <ul class="dropdown-menu"> -->
+                  
+                      <!-- <li><a href="#">Linux</a></li>
+                      <li><a href="#">Leetcode</a></li>
+                      <li><a href="#">计算机网络</a></li>
+                      <li><a href="#">建站历程</a></li> -->
 
-                    <!-- <li role="separator" class="divider"></li>
-                    <li><a href="#">link</a></li>
-                    <li role="separator" class="divider"></li>
-                    <li><a href="#">link</a></li>
-                  </ul>
-                </li> -->
-              </ul>
-              
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
-                  <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
-                  <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
-                  <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
-                  <form class="navbar-form navbar-left">
-                      <div class="form-group">
-                          <input type="text" class="form-control" placeholder="还没做好搜索">
-                      </div>
-                    <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-                  </form>
-                  {% if not user.is_authenticated %}
-                  <li>
-                      <a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
-                  </li>
-                  <li>
-                      <a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
-                  </li>
-                  {% else %}
-                      
-                <!-- <li><a href="#">Link</a></li> -->
-                  <li class="dropdown">
-                          {% if user.has_nickname %}
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}({{user.get_nickname}}) <span class="caret"></span></a>
-                          {% else %}
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
-                          {% endif %}
-                      <ul class="dropdown-menu">
-                          <li><a href="{% url 'user_info' %}">个人资料</a></li>
-                          <li><a href="{% url 'admin:index' %}">后台管理</a></li>
-                          <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
-                          <li role="separator" class="divider"></li>
-                          <li><a href="#">Separated link</a></li>
-                      {% endif %}
-                      </ul>
-                  </li>
-              </ul>
+                      <!-- <li role="separator" class="divider"></li>
+                      <li><a href="#">link</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="#">link</a></li>
+                    </ul>
+                  </li> -->
+            </ul>
+                
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
+              <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
+              <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
+              <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
+                <form class="navbar-form navbar-left">
+                  <div class="form-group">
+                    <input type="text" class="form-control" placeholder="还没做好搜索">
+                  </div>
+                      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+                </form>
+              {% if not user.is_authenticated %}
+              <li>
+                <a href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
+              </li>
+              <li>
+                <a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+              </li>
+              {% else %}
+                        
+                  <!-- <li><a href="#">Link</a></li> -->
+              <li class="dropdown">
+                {% if user.has_nickname %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }}({{user.get_nickname}}) <span class="caret"></span></a>
+                {% else %}
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ user.username }} <span class="caret"></span></a>
+                {% endif %}
+                <ul class="dropdown-menu">
+                  <li><a href="{% url 'user_info' %}">个人资料</a></li>
+                  <li><a href="{% url 'admin:index' %}">后台管理</a></li>
+                  <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                {% endif %}
+                </ul>
+              </li>
+            </ul>
           </div><!-- /.navbar-collapse -->
-        </div><!-- /.container-fluid -->
-      </nav>
+      </div><!-- /.container-fluid -->
+    </nav>
     {% block content %}{% endblock %}
 
     <!-- Modal -->
