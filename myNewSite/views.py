@@ -45,8 +45,8 @@ def home(request):
     context['dates'] = dates
     context['read_nums'] = read_nums
     context['today_hot_data']  = today_hot_data
+    
     context['yes_hot_data']  = yes_hot_data
-
     # context['seven_hotdata']  = seven_hotdata
     context['seven_hotdata']  = seven_hotdata
 
