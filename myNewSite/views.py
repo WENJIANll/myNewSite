@@ -23,7 +23,7 @@ def get7hotdata():
                 .values('id','title') \
                 .annotate(read_group_num=Sum('read_details__read_num')) \
                 .order_by('-read_group_num')
-    return blogs
+    return blogs[:7]
 
 
 def home(request):
