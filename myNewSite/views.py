@@ -8,22 +8,9 @@ from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.contrib.auth.models import User
 
-from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata
+from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata,get7hotdata
 from blog.models import Blog,BlogType
 from user.forms import LoginForm,RegForm
-
-
-# Create your views here.
-
-def get7hotdata():
-    today = timezone.now().date()
-    sevenday = today - datetime.timedelta(days=7)
-    blogs = Blog.objects \
-                .filter(read_details__date__lt=today,read_details__date__gt=sevenday) \
-                .values('id','title') \
-                .annotate(read_group_num=Sum('read_details__read_num')) \
-                .order_by('-read_group_num')
-    return blogs[:7]
 
 
 def home(request):
@@ -38,7 +25,6 @@ def home(request):
     if seven_hotdata is None:
         seven_hotdata = get7hotdata()
         cache.set('seven_hotdata',seven_hotdata,3600)
-        print('jisuan cach')
     else:
         pass
     context = {}
