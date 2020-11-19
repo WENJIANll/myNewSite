@@ -55,7 +55,7 @@ def get7hotdata():
     # 然后使用annotate按照这个结果进行分组，并对指定字段求和
     blogs = Blog.objects \
                 .filter(read_details__date__lt=today,read_details__date__gt=sevenday) \
-                .values('id','title') \ 
+                .values('id','title') \
                 .annotate(read_group_num=Sum('read_details__read_num')) \
                 .order_by('-read_group_num')
 
