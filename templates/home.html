@@ -37,47 +37,53 @@
         </div> -->
         
     </div>
-
-    <div class="hot_data" >
-        <div class="autodiv">
-            <div class="onehot">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color: white;">今日热门</div>
-                    <div class="panel-body">
-                        {% for data in today_hot_data %}
-                        <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>
-                        {% empty %}
-                        暂无
-                        {% endfor %}
+        <div class="hot_data" >
+            <div class="autodiv">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="onehot">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: white;">今日热门</div>
+                            <div class="panel-body">
+                                {% for data in today_hot_data %}
+                                <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>
+                                {% empty %}
+                                暂无
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="yeshot">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color: white;">昨日热门</div>
-                    <div class="panel-body">
-                        {% for data in yes_hot_data %}
-                        <li><a >{{ data.content_object.title }}</a></li>
-                        {% empty %}
-                        暂无
-                        {% endfor %}
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="yeshot">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: white;">昨日热门</div>
+                            <div class="panel-body">
+                                {% for data in yes_hot_data %}
+                                <li><a >{{ data.content_object.title }}</a></li>
+                                {% empty %}
+                                暂无
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="sevenhot">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="background-color: white;">7天内热门</div>
-                    <div class="panel-body">
-                        {% for data in seven_hotdata %}
-                        <li><a href="{% url 'blog_detail' data.id %}">{{ data.title }}</a></li>
-                        {% empty %}
-                        暂无
-                        {% endfor %}
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <div class="sevenhot">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="background-color: white;">7天内热门</div>
+                            <div class="panel-body">
+                                {% for data in seven_hotdata %}
+                                <li><a href="{% url 'blog_detail' data.id %}">{{ data.title }}</a></li>
+                                {% empty %}
+                                暂无
+                                {% endfor %}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    
     <div class="foot">
         <span class="footwenzi"><a href="http://beian.miit.gov.cn/"; target=_blank>*鲁ICP备2020042945号</a></span>
     </div>

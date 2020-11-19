@@ -39,14 +39,14 @@ header{
     margin: 0 auto;
 }
 .onehot{
-    width: 31%;
+    width: 100%;
     height: 330px;
     float: left;
     margin: 0 1%;
     border: #e7e7e7 solid;
 }
 .yeshot{
-    width: 31%;
+    width: 100%;
     height: 330px;
     float: left;
     margin: 0 1%;
@@ -54,7 +54,7 @@ header{
 
 }
 .sevenhot{
-    width: 31%;
+    width: 100%;
     height: 330px;
     float: left;
     margin: 0 1%;
