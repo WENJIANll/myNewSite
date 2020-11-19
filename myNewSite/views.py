@@ -34,7 +34,7 @@ def home(request):
     # seven_hotdata = get_seven_hotdata(blog_content_type)
 
     # 获取七天热门的缓存
-    seven_hotdata = cache.get('seven_hotdata')[:7]
+    seven_hotdata = cache.get('seven_hotdata')
     if seven_hotdata is None:
         seven_hotdata = get7hotdata()
         cache.set('seven_hotdata',seven_hotdata,3600)
