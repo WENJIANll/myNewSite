@@ -125,10 +125,8 @@ def send_vertifycode(request):
         else:
             request.session[send_type] = code
             request.session['send_time'] = now
-            print(code)
 
             # 发送邮件
-            print(email)
             send_status = send_mail(
                 '小破站的验证码',
                 '验证码：%s' % code,
@@ -192,4 +190,3 @@ def forgot_password(request):
     context['form'] = form
     context['return_back_url'] = redirect_to
     return render(request, 'user/forgot_password.html', context)
-
