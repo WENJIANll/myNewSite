@@ -120,7 +120,7 @@ class ChangeNicknameform(forms.Form):
     def clean_nickname(self):
         new_nickname = self.cleaned_data.get('new_nickname','').strip()
         if new_nickname == '':
-            raise ValidationError("新昵称不可为空")
+            raise forms.ValidationError("新昵称不可为空")
         return new_nickname
 
 class BindEmailForm(forms.Form):

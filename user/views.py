@@ -120,9 +120,11 @@ def send_vertifycode(request):
         code = ''.join(random.sample(string.ascii_letters + string.digits,4))
         now = int(time.time())
         send_time = request.session.get('send_time',0)
+        # now是距离标准时间的秒数，他和零之间的差距肯定是大于30的
         if now - send_time < 30:
             data['status'] = 'ERROR'
         else:
+            # 设置session
             request.session[send_type] = code
             request.session['send_time'] = now
 
@@ -134,10 +136,10 @@ def send_vertifycode(request):
                 [email],
                 fail_silently=False,
             )
-            if send_status:
-                print('发送成功')
-            else:
-                print('发送失败')
+            # if send_status:
+            #     print('发送成功')
+            # else:
+            #     print('发送失败')
 
             data['status'] = 'SUCCESS'
     else:
