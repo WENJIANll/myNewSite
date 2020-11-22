@@ -21,14 +21,14 @@ p#logo{
     text-align: center;
     margin: 0;
 }
-a#logo2{
+#logo2{
     height: 35px;
     width: 175px;
     float: left;
     margin: 0;
     color: #000;
     font-size: x-large;
-    font-family:arial, sans-serif; ;
+    text-shadow: 2px -2px 1px #f48024;
 }
 ul.navbar-right>li>a{
     color: #000;
@@ -39,6 +39,3 @@ a{
 div.container{
     /* width: 85%; */
 }
-/* ul.pagination{
-    text-align: center;
-} */
