@@ -18,12 +18,13 @@ ul.blog-types{
     width: 220px;
     font-size: 15px;
     color: black;
+    /*margin: 0 auto;*/
 }
 /*分页器*/
 .paginationdiv{
     text-align: center;
     width: 250px;
-    margin: 10px auto;
+    margin: 3px auto;
 }
 /*.blog-left{*/
 /*    height: 850px;*/

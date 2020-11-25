@@ -10,6 +10,7 @@ class ProfileInline(admin.StackedInline):
     model = Profile
     can_delete = False
 
+# 重新设计了User模型在admin上的显示
 class UserAdmin(BaseUserAdmin):
     # 为了在admin界面显示Profile的字段，定义inlines为上面的类
     inlines = (ProfileInline, )
@@ -21,6 +22,7 @@ class UserAdmin(BaseUserAdmin):
 
 # Re-register UserAdmin
 admin.site.unregister(User)
+# 因为重新设计了UserAdmin，所以要重新register
 admin.site.register(User, UserAdmin)
 
 @admin.register(Profile)

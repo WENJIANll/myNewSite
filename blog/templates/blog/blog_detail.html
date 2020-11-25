@@ -98,7 +98,7 @@
                     <div class="preblog">
                         <p>上一篇：
                         {% if previous_blog %}
-                        <a href="{% url 'blog_detail' previous_blog.pk %}">{{ previous_blog.title }}</a>
+                        <a href="{% url 'blog_detail' previous_blog.pk %}?page={{ page_currn_num }}">{{ previous_blog.title }}</a>
                         {% else %}
                         没有了
                         {% endif %}
@@ -107,7 +107,7 @@
                     <div class="nextblog">
                         <p>下一篇：
                         {% if next_blog %}
-                        <a href="{% url 'blog_detail' next_blog.pk %}">{{ next_blog.title }}</a>
+                        <a href="{% url 'blog_detail' next_blog.pk %}?page={{ page_currn_num }}">{{ next_blog.title }}</a>
                         {% else %}
                         没有了
                         {% endif %}

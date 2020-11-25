@@ -69,9 +69,9 @@ def user_info(request):
 def change_nickname(request):
     redirect_to = request.GET.get('from', reverse('home'))
     if request.method == 'POST':
-        # 传user是为了给form绑定上是哪个用户要改昵称
+        # 传user是为了给form绑定上，为了判断要修改的用户有没有登录
         form = ChangeNicknameform(request.POST,user=request.user)
-        if form.is_valid() :
+        if form.is_valid():
             new_nickname = form.cleaned_data['new_nickname']
             # 创建profile，是否创建
             profile,created = Profile.objects.get_or_create(user=request.user)
