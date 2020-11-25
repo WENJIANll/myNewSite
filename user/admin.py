@@ -4,11 +4,14 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 
+# 为Profile创建一个数据行
 class ProfileInline(admin.StackedInline):
+    # 模型是Profile
     model = Profile
     can_delete = False
 
 class UserAdmin(BaseUserAdmin):
+    # 为了在admin界面显示Profile的字段，定义inlines为上面的类
     inlines = (ProfileInline, )
     list_display = ('username', 'nickname', 'email', 'is_staff', 'is_active', 'is_superuser')
 

@@ -47,8 +47,3 @@ class Likes_count(models.Model):
     # 将上面两个变为通用的外键
     content_object = GenericForeignKey('content_type', 'object_id')
     like_count = models.IntegerField(default=0)
-
-    
-
-
-    

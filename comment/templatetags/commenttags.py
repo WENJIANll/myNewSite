@@ -29,6 +29,7 @@ def get_comment_list(obj):
 @register.simple_tag(takes_context=True)
 def get_like_status(context, obj):
     content_type = ContentType.objects.get_for_model(obj)
+    # 获取context中的user，就算不往里面放这个user，Django的User模型也会自动放的，我还不知道为什么
     user = context['user']
     if not user.is_authenticated:
         return ''

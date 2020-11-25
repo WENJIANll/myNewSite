@@ -1,11 +1,68 @@
+a,li{
+    text-decoration: none;
+}
+li{
+    list-style:none;
+}
 ul.blog-types{
     list-style-type: none;
 }
-div.blog:not(:last-child){
-    margin-bottom: 2em;
-    padding-bottom: 1em;
-    border-bottom: 1px solid #eee;
+.indexx{
+    text-align: center;
+    font-size: 20px;
+    color: black;
 }
+
+/* 目录文章标题 */
+.cata-blog-title{
+    width: 220px;
+    font-size: 15px;
+    color: black;
+}
+/*分页器*/
+.paginationdiv{
+    text-align: center;
+    width: 250px;
+    margin: 10px auto;
+}
+/*.blog-left{*/
+/*    height: 850px;*/
+/*    border-right: 1px solid black;*/
+/*}*/
+/*.blog-right{*/
+/*    height: 850px;*/
+/*    padding-left: 20px;*/
+/*}*/
+
+.blog-profile{
+    margin-top: 23px;
+}
+/*文章内容*/
+.markdown-body{
+    margin-top: 28px;
+}
+.preblog{
+    float: left;
+}
+.nextblog{
+    float: right;
+}
+.blog-right-center{
+    margin-top: 20px;
+}
+.coment-tip{
+    border-bottom: 1px black solid;
+    font-size: 17px;
+    padding-bottom: 1em;
+}
+.blog-right-centom{
+    margin-top: 60px;
+}
+.comment-bt{
+    font-size: 17px;
+    margin-top: 20px;
+}
+
 div.blog h4{
     margin-top: 0.5em;
 }
@@ -27,13 +84,6 @@ div.blog-more{
     margin-top: 1em;
 }
 
-div.comment-area {
-    margin-top: 2em;
-}
-h3.comment-area-title {
-    border-bottom: 1px solid #ccc;
-    padding-bottom: 0.4em;
-}
 div.django-ckeditor-widget {
     width: 100%;
 }
@@ -70,13 +120,6 @@ div#timetime{
 }
 div#tagtag{
     width: 80px;
-}
-#atag>a{
-    text-decoration:none;
-}
-
-div#tagtag>a{
-    text-decoration:none;
 }
 
 /* div#type-title{

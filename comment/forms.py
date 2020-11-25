@@ -30,7 +30,7 @@ class CommentForm(forms.Form):
 
         # 评论对象验证
         content_type = self.cleaned_data['content_type']
-        object_id  =  self.cleaned_data['object_id']
+        object_id = self.cleaned_data['object_id']
         try:
             model_class = ContentType.objects.get(model=content_type).model_class()
             model_obj = model_class.objects.get(pk=object_id)
