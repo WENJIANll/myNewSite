@@ -7,6 +7,8 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.core.mail import send_mail
 from django.http import JsonResponse
+from django.core import serializers
+
 from .forms import LoginForm, RegForm,ChangeNicknameform,BindEmailForm,Change_passwordForm,ForgotPasswordForm
 from .models import Profile
 

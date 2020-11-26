@@ -8,6 +8,9 @@
 {% block  head-extends %}
     <link rel="stylesheet"  href="{% static 'home.css' %}">
     <script src="http://cdn.highcharts.com.cn/highcharts/highcharts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
+
 {% endblock %}
 
 {% block nav_home_active %} active {% endblock %}
@@ -43,12 +46,12 @@
                     <div class="onehot">
                         <div class="panel panel-default">
                             <div class="panel-heading" style="background-color: white;">今日热门</div>
-                            <div class="panel-body">
-                                {% for data in today_hot_data %}
-                                <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>
-                                {% empty %}
-                                暂无
-                                {% endfor %}
+                            <div class="panel-body" id="today-hot">
+                                <div v-for="data in today_hot">
+                                    <li>[[ data.id ]] </li>
+                                </div>
+{#                                    <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>#}
+{#                                    暂无#}
                             </div>
                         </div>
                     </div>
@@ -57,9 +60,9 @@
                     <div class="yeshot">
                         <div class="panel panel-default">
                             <div class="panel-heading" style="background-color: white;">昨日热门</div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="yes-hot">
                                 {% for data in yes_hot_data %}
-                                <li><a >{{ data.content_object.title }}</a></li>
+                                <li><a href="{% url 'blog_detail' data.id %}">{{ data.content_object.title }}</a></li>
                                 {% empty %}
                                 暂无
                                 {% endfor %}
@@ -67,11 +70,12 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <div class="sevenhot">
                         <div class="panel panel-default">
                             <div class="panel-heading" style="background-color: white;">7天内热门</div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="seven-hot">
                                 {% for data in seven_hotdata %}
                                 <li><a href="{% url 'blog_detail' data.id %}">{{ data.title }}</a></li>
                                 {% empty %}
@@ -89,7 +93,30 @@
     </div>
     
 </header>
-    
+
+    <script>
+    var app = new Vue({
+        el: "#today-hot",
+        delimiters: ["[[","]]"],
+        data: {
+            today_hot:[]
+        },
+        mounted: function(){
+            this.fetchData();
+        },
+        methods:{
+            fetchData() {
+                axios.get("/test").then(response=>{
+                    console.log(response.data)
+                    this.today_hot = response.data;
+                }),err=>{
+                    console.log(err);
+                };
+            }
+        }
+    });
+
+    </script>
 
 
 

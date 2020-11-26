@@ -7,6 +7,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from django.core import serializers
 
 from read_account.utils import get_sevendays_date,get_today_hot,get_yestody_hotdata,get7hotdata
 from blog.models import Blog,BlogType
@@ -21,6 +23,10 @@ def home(request):
     # seven_hotdata = get_seven_hotdata(blog_content_type)
 
     # 获取七天热门的缓存
+
+    # seven_hotdata = get7hotdata()
+    # cache.set('seven_hotdata',seven_hotdata,3600)
+
     seven_hotdata = cache.get('seven_hotdata')
     if seven_hotdata is None:
         seven_hotdata = get7hotdata()
@@ -33,9 +39,9 @@ def home(request):
     context['today_hot_data']  = today_hot_data
     
     context['yes_hot_data']  = yes_hot_data
-    # context['seven_hotdata']  = seven_hotdata
     context['seven_hotdata']  = seven_hotdata
-
+    # context['seven_hotdata']  = serializers.serialize("json",seven_hotdata)
+    # return JsonResponse(context,safe=False)
     return render(request,'home.html',context)
 '''
 def loginn(request):
@@ -91,3 +97,9 @@ def register(request):
     return render(request, 'register.html', context)
     '''
 
+def test(request):
+    context = [
+        {'id':'测试vue'}
+    ]
+
+    return JsonResponse(context,safe=False)

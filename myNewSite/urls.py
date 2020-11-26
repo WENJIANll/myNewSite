@@ -25,14 +25,13 @@ from . import views
 urlpatterns = [
     #规定什么网址访问，用什么方法处理
     path('',views.home,name="home" ),
+    path('test/', views.test, name="test"),
     path('admin/', admin.site.urls),
     path('ckeditor', include('ckeditor_uploader.urls')),
     path('mdeditor/', include('mdeditor.urls')),
     path('blog/',include('blog.urls')),
     path('comment/', include('comment.urls')),
     path('user/', include('user.urls')),
-
-
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

@@ -53,12 +53,15 @@ def get7hotdata():
     sevenday = today - datetime.timedelta(days=7)
     # values返回一个指定字段作为key的字典，而不是返回一个或一组实例对象
     # 然后使用annotate按照这个结果进行分组，并对指定字段求和
+    # blogs = Blog.objects \
+    #             .filter(read_details__date__lt=today,read_details__date__gt=sevenday) \
+    #             .annotate(read_group_num=Sum('read_details__read_num')) \
+    #             .order_by('-read_group_num')
     blogs = Blog.objects \
                 .filter(read_details__date__lt=today,read_details__date__gt=sevenday) \
                 .values('id','title') \
                 .annotate(read_group_num=Sum('read_details__read_num')) \
                 .order_by('-read_group_num')
-
     return blogs[:7]
     #获取30天的后面完善
 
