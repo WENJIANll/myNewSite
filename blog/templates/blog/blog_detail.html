@@ -152,7 +152,7 @@
                     <h3 class="comment-area-title">评论列表</h3>
                     <div id="comment_list">
                         <!-- 用模板标签实现了 -->
-                        。。
+                        {% get_comment_list blog as  comments%}
                         {% for comment in comments %}
                             <div id="root_{{ comment.pk }}" class="comment">
                                 <!-- 根评论详情 -->
