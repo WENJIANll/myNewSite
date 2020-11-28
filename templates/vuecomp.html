@@ -216,12 +216,6 @@
                 numbers : [1,2,3,4,5],
                 nums : [[1,2,3,4,5],[6,7,8,9]]
             },
-            watchsss: {
-                behavioues: function () {
-                    this.newb.push(this.behavioues)
-                    console.log(this.newb)
-                }
-            },
             computed: {
                 filternumbers : function () {
                     return this.numbers.filter(function (item) {
@@ -229,9 +223,6 @@
                     })
                 }
             },
-            created : function () {
-                this.click = _.debounce(this.click,500)
-            } ,
             methods : {
                 addnew : function () {
                     this.newb.push({content:this.behavioues})
