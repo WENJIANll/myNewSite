@@ -103,3 +103,6 @@ def test(request):
     ]
 
     return JsonResponse(context,safe=False)
+
+def vuecomp(request):
+    return render(request,'vuecomp.html')

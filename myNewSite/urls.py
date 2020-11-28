@@ -32,6 +32,7 @@ urlpatterns = [
     path('blog/',include('blog.urls')),
     path('comment/', include('comment.urls')),
     path('user/', include('user.urls')),
+    path('vuecomp/', views.vuecomp,name = 'vuecomp'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

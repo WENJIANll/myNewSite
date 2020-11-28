@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    我的网站|首页
+{% endblock %}
+
+{% block  head-extends %}
+    <link rel="stylesheet"  href="../static/vuecomp.css">
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+{% endblock %}
+
+{% block nav_home_active %} active {% endblock %}
+
+{% block content %}
+<header >
+    <div class="mainvue">
+        <div class="subvue" id="vue1">
+            <p> data ：[[ data ]] </p>
+            <p> count ：[[ count ]] </p>
+            <p>Using mustaches: [[ rawHtml ]]</p>
+            <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+            <button :disabled="isButtonDisabled" @[cliarg]="clickf">Button</button>
+            <p>count + 1: [[ count + 1 ]]</p>
+            <p>count对应的bool值: [[ count ? 'true' : 'false' ]]</p>
+            <p>我是js表达式产生的data反转: [[ data.split('').reverse().join('') ]]</p>
+            <p>我是vm的计算属性产生的反转: [[ reversemsg ]]</p>
+            <!-- 计算属性是基于它们的响应式依赖进行缓存的 -->
+            <p>我是vm的方法属性产生的反转: [[ reversemsg1() ]]</p>
+            <!-- v-if 是是否渲染dom-->
+            <!-- v-show 是是否显示dom，无论是否显示，都要渲染dom树-->
+            <p v-if="seen">vm的seen值为true，所以你看到我了</p>
+        </div>
+        <div class="subvue" id="vue2" >
+            <p>我是axios</p>
+            <label>提问时间</label>
+            <input v-model="question" placeholder="尝试输入问题">
+            <p> 答案 ：[[ answer ]] </p>
+        </div>
+        <div class="subvue" id="vue3" :class="object" :style="style">[[ content ]]
+            <button @click="click"> 点击来改变我的样式 </button>
+        </div>
+        <div class="subvue" id="vue4">
+            <!-- 用 key 管理可复用的元素  -->
+            <p v-if="vue"> Vue 简直太棒了</p>
+            <p v-else> 我是else </p>
+            <div>
+                <template v-if="!vue">
+                <p>1</p>
+                <p>2</p>
+            </template>
+            </div>
+
+
+            <form @submit.prevent="addnew">
+                <label>添加下面的列表</label>
+                <input v-model="behavioues" placeholder="">
+                <button>提交</button>
+            </form>
+            <ul v-for="(item,index) of newb">
+                <li>[[ item.content ]]</li>
+                <button @click="remove(index)">删除</button>
+            </ul>
+
+            <p>遍历对象内的属性</p>
+            <ul v-for="(val,na,ind) in obj">
+                <li>[[ ind ]] -- [[ na ]] -- [[ val ]]</li>
+            </ul>
+            <p>遍历由对象组成的列表</p>
+            <ul v-for="item in items">
+                <li>[[ item.content]]</li>
+            </ul>
+            <p>计算方法：显示被2整除的数字</p>
+            <ul v-for="item in filternumbers">
+                <li>[[ item ]]</li>
+            </ul>
+
+            <p>方法：显示被2整除的数字</p>
+            <ul v-for="item in nums">
+                <li v-for="i in methodfornumber(item)">[[ i ]]</li>
+            </ul>
+
+        </div>
+        <div class="subvue" id="vue5">
+
+        </div>
+    </div>
+
+</header>
+
+    <script>
+        // 普通例子
+        var vm1 = new Vue({
+            el : "#vue1",
+            delimiters: ["[[","]]"],
+            data : {
+                count : 0,
+                data : "abc",
+                rawHtml: "<span style=\"color: red\">This should be red.</span>",
+                isButtonDisabled : false,
+                seen : true,
+                cliarg : "click",
+                clickf : function () {
+                    console.log("我被点击了")
+                }
+            },
+            computed : {
+                reversemsg : {
+                    get : function () {
+                    return this.data.split('').reverse().join('')
+                },
+                    set : function (newvalue) {
+                        console.log("设置为新值：" + newvalue)
+                        this.data = newvalue
+                    }
+                }
+            },
+            methods: {
+                reversemsg1: function () {
+                    return this.data.split('').reverse().join('')
+                }
+            },
+            created : function () {
+                console.log("vm已被挂载")
+            }
+        })
+        // 不要在选项 property 或回调上使用箭头函数
+        // data的值发生变化，触发会函数
+        // $watch接受两个参数，一个是要观察的值，一个是条件满足后触发的回调函数
+        vm1.$watch('data',function (n,o){
+            console.log(n,o)
+        })
+
+        // axios异步请求
+        var vm2 = new Vue({
+            el : "#vue2",
+            delimiters: ["[[","]]"],
+            data : {
+                question : '',
+                answer : ['我是答案']
+            },
+            watch : {
+                question: function () {
+                    this.getanserver()
+                }
+            },
+            created : function () {
+                // 延迟调用this.getanwser
+                this.getanserver = _.debounce(this.getanwser,500)
+            },
+            methods: {
+                getanwser : function () {
+                    console.log(this.question)
+                    if (this.question.indexOf('?') === -1){
+                        this.answer = '一般问句都已问号结尾的哦'
+                        return
+                    }
+                    this.answer = '请稍等'
+                    var vm = this
+                    axios.get('/test').then(function (response) {
+                        resdata = response.data
+                        vm.answer = '你输入的是个问题，我在远端获得的答案是：' + resdata[0].id
+                    }).catch(function (error) {
+                        vm.answer = 'error! : ' + error
+                    })
+                }
+            }
+        })
+
+        // 绑定class和style
+        var vm3 = new Vue({
+            el : "#vue3",
+            delimiters: ["[[","]]"],
+            data : {
+                object : {
+                    active : true
+                },
+                content : '我是vue添加的样式',
+                style : {
+                    color:'red',
+                    fontSize : '15px'
+                }
+            },
+            methods : {
+                click : function () {
+                    prestate = this.object.active
+                    this.object.active = !prestate
+                    this.style.color = 'black'
+                }
+            }
+        })
+
+        // 条件渲染和列表渲染
+        // filter()、concat() 和 slice()
+        var vm4 = new Vue({
+            el : "#vue4",
+            delimiters: ["[[","]]"],
+            data : {
+                vue : true,
+                items : [
+                    {id : 1,content:'one'},
+                    {id : 2,content: 'two'}
+                ],
+                obj : {
+                    sleep : '睡觉',
+                    eat : '吃饭',
+                    see : '看'
+                },
+                behavioues : '',
+                newb : [
+                    {content:'contentone'},
+                    {content:'contenttow'}
+                ],
+                numbers : [1,2,3,4,5],
+                nums : [[1,2,3,4,5],[6,7,8,9]]
+            },
+            watchsss: {
+                behavioues: function () {
+                    this.newb.push(this.behavioues)
+                    console.log(this.newb)
+                }
+            },
+            computed: {
+                filternumbers : function () {
+                    return this.numbers.filter(function (item) {
+                        return (item % 2) === 0
+                    })
+                }
+            },
+            created : function () {
+                this.click = _.debounce(this.click,500)
+            } ,
+            methods : {
+                addnew : function () {
+                    this.newb.push({content:this.behavioues})
+                    this.behavioues = ''
+                },
+                remove : function (index) {
+                    this.newb.splice(index,1)
+                },
+                methodfornumber:function (item) {
+                    return item.filter(function (i) {
+                        return (i % 2) === 0
+                    })
+                }
+            }
+        })
+
+        //
+        var vm5 = new Vue({
+
+        })
+    </script>
+
+{% endblock %}

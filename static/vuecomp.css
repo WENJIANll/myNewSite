@@ -1,0 +1,14 @@
+.mainvue{
+    width: 96%;
+    margin: 50px;
+    padding: 50px;
+    background-color: #dff0d8;
+}
+.subvue{
+    margin: 20px;
+    border: #2b542c 1px solid;
+    padding: 10px;
+}
+.active{
+    background-color: greenyellow;
+}
