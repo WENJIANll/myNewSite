@@ -62,7 +62,7 @@
                             <div class="panel-heading" style="background-color: white;">昨日热门</div>
                             <div class="panel-body" id="yes-hot">
                                 {% for data in yes_hot_data %}
-                                <li><a href="{% url 'blog_detail' data.id %}">{{ data.content_object.title }}</a></li>
+                                <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>
                                 {% empty %}
                                 暂无
                                 {% endfor %}

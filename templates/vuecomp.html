@@ -53,15 +53,13 @@
             </template>
             </div>
 
-
             <form @submit.prevent="addnew">
                 <label>添加下面的列表</label>
                 <input v-model="behavioues" placeholder="">
                 <button>提交</button>
             </form>
             <ul v-for="(item,index) of newb">
-                <li>[[ item.content ]]</li>
-                <button @click="remove(index)">删除</button>
+                <li>[[ item.content ]]>><button @click="remove(index)">删除</button></li>
             </ul>
 
             <p>遍历对象内的属性</p>
@@ -84,8 +82,91 @@
 
         </div>
         <div class="subvue" id="vue5">
-
+            <button @click="war('点击没有进行',$event)">方法传event</button>
+            <button @click="war2">自动传event</button>
+            <button @click.prevent="war3">事件修饰符阻止</button>
+            <button @click.once="war3">只触发一次</button>
+            <!-- 可以绑定多个事件 -->
+            <input @keyup.ctrl.enter="keyup" @keyup.page-down="pagedown">
         </div>
+        <div class="subvue" id="vue6">
+            <!-- .lazy修饰符只有在form submit的时候才会和绑定的数据进行同步 -->
+            <form @submit.prevent>
+                <textarea v-model.lazy="texts"></textarea>
+                <button type="submit">提交</button>
+                <br>
+                <br>
+                <br>
+                <p>多行文本值为：[[ texts ]]</p>
+            </form>
+
+            <input type="checkbox" id="checkbox0" value="我是第零个复选框" v-model="checks0">
+            <label for="11"> 000-----选中的值是：[[ checks0 ]] </label>
+            <p>
+                <input type="checkbox" id="checkbox1" value="海贼" v-model="checks1">
+                <label for="checkbox1"> 海贼 </label>
+                <input type="checkbox" id="checkbox2" value="EVA" v-model="checks1">
+                <label for="checkbox2"> EVA </label>
+                <input type="checkbox" id="checkbox3" value="巨人" v-model="checks1">
+                <label for="checkbox3"> 巨人 </label>
+                <p>你喜欢的动漫：[[ checks1 ]]</p>
+            </p>
+            <p>
+                <span>
+                    性别：
+                    <input type="radio" id="radio1" value="男" v-model="picked">
+                    <label for="radio1">男</label>
+                    <input type="radio" id="radio2" value="女" v-model="picked">
+                    <label for="radio2">女</label>
+                    <input type="radio" id="radio3" value="嗯？" v-model="picked">
+                    <label for="radio3">嗯？</label>
+                    所选为 [[ picked ]]
+                </span>
+            </p>
+            <!-- parseFloat() -->
+            <p>v-model.number 自动将用户的输入转换位数字格式而不是字符串</p>
+            <p>v-model.trim 自动过滤用户输入的首尾空白字符</p>
+            <div id="example-5">
+                <select v-model="selected">
+                    <option disabled value="">请选择</option>
+                    <option value="请选择">请选择</option>
+                    <option>A</option>
+                    <option>B</option>
+                    <option>C</option>
+                </select>
+                <span>Selected: [[ selected ]]</span>
+            </div>
+            <div>
+                <select v-model="selected">
+                    <option v-for="option in options" :value="option.value">
+                    [[ option.text ]]
+                    </option>
+                </select>
+                <span>Selected: [[ selected ]]</span>
+            </div>
+        </div>
+        <div class="subvue" id = "vue7" >
+            <div :style="{ fontSize : postFontSize + 'em' }" >
+                <buttom-counter v-for="obj in objs" :title="obj.title" :content="obj.content" @sizeadd="sizeaddd"></buttom-counter>
+                <buttom-counter @sizeadd="postFontSize += $event">我是$event传值</buttom-counter>
+            </div>
+            <compinput v-model="msg"></compinput>
+            <p> [[ msg ]] </p>
+        </div>
+
+        <div id="dynamic-component-demo" class="demo subvue">
+          <button
+            v-for="tab in tabs"
+            v-bind:key="tab"
+            v-bind:class="['tab-button', { active: currentTab === tab }]"
+            v-on:click="currentTab = tab"
+          >
+            [[ tab ]]
+          </button>
+
+          <component v-bind:is="currentTabComponent" class="tab"></component>
+        </div>
+
     </div>
 
 </header>
@@ -214,7 +295,7 @@
                     {content:'contenttow'}
                 ],
                 numbers : [1,2,3,4,5],
-                nums : [[1,2,3,4,5],[6,7,8,9]]
+                nums : [[1,2,],[6,7,8]]
             },
             computed: {
                 filternumbers : function () {
@@ -239,7 +320,139 @@
             }
         })
 
-        //
+        //原生dom事件是什么
+        var vm5 = new Vue({
+            el : "#vue5",
+            delimiters: ["[[","]]"],
+            data : {
+                meg : '你好'
+            },
+            methods : {
+                war : function (val1,e) {
+                    // dom原生事件 MouseEvent {isTrusted: true, screenX: 157, screenY: 476, clientX: 157, clientY: 373, …}
+                    console.log(e)
+                    if (e){
+                        // 方法最好只有纯粹的数据逻辑，而不是去处理 DOM 事件细节
+                        e.preventDefault()
+                    }
+                    alert(val1)
+                },
+                war2 : function (e) {
+                    console.log(e)
+                },
+                war3 : function () {
+                    alert('事件修饰符可以干preventDefault()等的事情')
+                },
+                keyup : function () {
+                    alert('你按了enter建')
+                },
+                pagedown : function () {
+                    alert('你按了pagedown')
+                }
+            }
+        })
+
+        //表单绑定
+        var vm6 = new Vue({
+            el : "#vue6",
+            delimiters: ["[[","]]"],
+            data : {
+                texts : '',
+                checks0 : [],
+                checks1 : [],
+                picked : '',
+                selected : '',
+                options: [
+                  { text: 'One', value: '111' },
+                  { text: 'Two', value: '222'},
+                  { text: 'Three', value: '333' }
+                ]
+            }
+        })
+
+        Vue.component('buttom-counter',{
+            props : ['title','content'],
+            delimiters: ["[[","]]"],
+            data : function () {
+                return {
+                    count : 0
+                }
+            },
+            // 注意$emit('sizeadd',1)中的1是数值类型，如果$emit('sizeadd','1')这样传的话，那就成了拼接字符串了，1 + 1变为11了
+            // emit就是为了将自定义的事件传出去，然后让外部给这个事件定义上相关的方法，从而子组件可以改变父组件内的data数据
+            template : `
+                    <div>
+                        <button @click="$emit('sizeadd',1)">点击我来增大字体</button>
+                        <button @click="clickcount">点击我来增加count的值: [[ count ]],我的title是 [[ title ]],content是：[[ content ]] </button>
+                        <slot></slot>
+                    </div>
+                    `,
+            methods : {
+                clickcount : function () {
+                    this.count += 1
+                }
+            }
+        })
+
+        Vue.component('compinput',{
+            props: ['value'],
+            delimiters: ["[[","]]"],
+            data : function () {
+                return {
+                    compmodel : ''
+                }
+            },
+            template: `
+            <input :value="value" @input="$emit('input',$event.target.value)">
+            `
+        })
+
+        var vm7 = new Vue({
+            el : "#vue7",
+            delimiters: ["[[","]]"],
+            data : {
+                objs : [
+                    {title : '111',content : '我是content1'},
+                    {title : '222',content : '我是content2'}
+                    ],
+                postFontSize : 1,
+                msg : 'msg'
+            },
+            methods : {
+                sizeaddd : function (e) {
+                    console.log(e)
+                    this.postFontSize += e
+                }
+            }
+        })
+
+        Vue.component("tab-home", {
+            delimiters: ["[[","]]"],
+            template: "<div>Home component</div>"
+          });
+        Vue.component("tab-posts", {
+            delimiters: ["[[","]]"],
+            template: "<div>Posts component</div>"
+          });
+        Vue.component("tab-archive", {
+            delimiters: ["[[","]]"],
+            template: "<div>Archive component</div>"
+          });
+
+        new Vue({
+            el: "#dynamic-component-demo",
+            delimiters: ["[[","]]"],
+            data: {
+              currentTab: "Home",
+              tabs: ["Home", "Posts", "Archive"]
+            },
+            computed: {
+              currentTabComponent: function() {
+                return "tab-" + this.currentTab.toLowerCase();
+              }
+            }
+          });
+
     </script>
 
 {% endblock %}

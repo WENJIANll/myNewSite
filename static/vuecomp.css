@@ -1,6 +1,6 @@
 .mainvue{
     width: 96%;
-    margin: 50px;
+    margin: 0px 50px;
     padding: 50px;
     background-color: #dff0d8;
 }
@@ -8,6 +8,7 @@
     margin: 20px;
     border: #2b542c 1px solid;
     padding: 10px;
+    border-radius: 15px;
 }
 .active{
     background-color: greenyellow;
