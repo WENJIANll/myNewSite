@@ -52,6 +52,7 @@
                                 </div>
 {#                                    <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>#}
 {#                                    暂无#}
+
                             </div>
                         </div>
                     </div>
@@ -107,7 +108,6 @@
         methods:{
             fetchData: function() {
                 axios.get("/test").then(response=>{
-                    console.log(response.data)
                     this.today_hot = response.data;
                 }),err=>{
                     console.log(err);

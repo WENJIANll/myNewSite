@@ -147,8 +147,8 @@
         </div>
         <div class="subvue" id = "vue7" >
             <div :style="{ fontSize : postFontSize + 'em' }" >
-                <buttom-counter v-for="obj in objs" :title="obj.title" :content="obj.content" @sizeadd="sizeaddd"></buttom-counter>
-                <buttom-counter @sizeadd="postFontSize += $event">我是$event传值</buttom-counter>
+                <buttom-counter v-for="obj in objs" :title="obj.title" :content="obj.content" :value="'1'" @sizeadd="sizeaddd"></buttom-counter>
+                <buttom-counter @sizeadd="postFontSize += $event">$event接受$emit传出来的值</buttom-counter>
             </div>
             <compinput v-model="msg"></compinput>
             <p> [[ msg ]] </p>
@@ -166,7 +166,10 @@
 
           <component v-bind:is="currentTabComponent" class="tab"></component>
         </div>
-
+        <div class="subvue" id="vue8">
+            <base-input required placeholder="Enter your username" @focus="onfocus"></base-input>
+            <p>  [[ msgmsg ]]  </p>
+        </div>
     </div>
 
 </header>
@@ -371,7 +374,17 @@
         })
 
         Vue.component('buttom-counter',{
-            props : ['title','content'],
+            // props : ['title','content'],
+            props : {'title' : Number,
+                'content' : String,
+                'value' : {
+                type : String,
+                    validator : function (v) {
+                        console.log(v)
+                        return v
+                    }
+                }
+            },
             delimiters: ["[[","]]"],
             data : function () {
                 return {
@@ -412,8 +425,8 @@
             delimiters: ["[[","]]"],
             data : {
                 objs : [
-                    {title : '111',content : '我是content1'},
-                    {title : '222',content : '我是content2'}
+                    {title : 111,content : '我是content1'},
+                    {title : 222,content : '我是content2'}
                     ],
                 postFontSize : 1,
                 msg : 'msg'
@@ -453,6 +466,53 @@
             }
           });
 
+        Vue.component('base-input', {
+          inheritAttrs: false,
+            delimiters: ["[[","]]"],
+          props: ['label', 'value'],
+          computed: {
+            inputListeners: function () {
+              var vm = this
+              // `Object.assign` 将所有的对象合并为一个新对象
+              return Object.assign({},
+                // 我们从父级添加所有的监听器
+                this.$listeners,
+                // 然后我们添加自定义监听器，
+                // 或覆写一些监听器的行为
+                {
+                  // 这里确保组件配合 `v-model` 的工作
+                  input: function (event) {
+                    vm.$emit('input', event.target.value)
+                  }
+                }
+              )
+            }
+          },
+          // v-bind="$attrs"就是将$attrs这个对象的所有属性绑定到input上
+            //$attrs 代表的就是从父组件传来的所有属性组成的对象
+          template: `
+            <label>
+              [[ label ]]
+              <input
+                v-bind="$attrs"
+                v-bind:value="value"
+                v-on="inputListeners"
+              >
+            </label>
+          `
+        })
+        new Vue({
+            delimiters: ["[[","]]"],
+            el:"#vue8",
+            data : {
+                msgmsg : ''
+            },
+            methods : {
+                onfocus : function () {
+                    this.msgmsg = '请输入值'
+                }
+            }
+        })
     </script>
 
 {% endblock %}
