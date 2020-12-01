@@ -19,52 +19,52 @@
                 <div class="table-responsive">
                     <div class="table table-striped">
                         <tbody>
-                            <ul class="nav nav-sidebar">
-                                {% for blogtitle in blogs %}
-                                    <li id="atag"  ><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}" class="glyphicon glyphicon-list-alt">--{{ blogtitle.title }}</a></li>
-                                {% endfor %}
-                            </ul>
-                            <div class="paginationdiv">
-                                    <ul class="pagination">
-                                        <li>
-                                            {% if page_of_blogs.has_previous %}
-                                            <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                            {% else %}
-                                            <span aria-hidden="true">&laquo;</span>
-                                            {% endif %}
-                                        </li>
-                                            {# 全部页码 #}
-                                            {% for page_num in page_range %}
-                                                {% if page_num == page_of_blogs.number %}
-                                                <li class="active"><span>{{ page_num }}</span></li>
-                                                {% else %}
-                                                    {% if page_num == '...' %}
-                                                    <li><span>{{ page_num }}</span></li>
-                                                    {% else %}
-                                                    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
-                                                    {% endif %}
-                                                {% endif %}
-                                            {% endfor %}
-
-                                        <li>
-                                            {% if page_of_blogs.has_next %}
-                                            <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                            {% else %}
-                                            <span aria-hidden="true">&raquo;</span>
-                                            {% endif %}
-                                        </li>
-                                    </ul>
-                                </div>
                             <div class="panel panel-default">
-                            <div class="panel-heading">描述</div>
-                            <div class="panel-body">
-                                {{ blog_type_desc | safe}}
+                                <div class="panel-heading">描述</div>
+                                <div class="panel-body">
+                                    {{ blog_type_desc | safe}}
+                                </div>
                             </div>
-                        </div>
+                                <ul class="nav nav-sidebar">
+                                    {% for blogtitle in blogs %}
+                                        <li id="atag"  ><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}" class="glyphicon glyphicon-list-alt">--{{ blogtitle.title }}</a></li>
+                                    {% endfor %}
+                                </ul>
+                                <div class="paginationdiv">
+                                        <ul class="pagination">
+                                            <li>
+                                                {% if page_of_blogs.has_previous %}
+                                                <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
+                                                    <span aria-hidden="true">&laquo;</span>
+                                                </a>
+                                                {% else %}
+                                                <span aria-hidden="true">&laquo;</span>
+                                                {% endif %}
+                                            </li>
+                                                {# 全部页码 #}
+                                                {% for page_num in page_range %}
+                                                    {% if page_num == page_of_blogs.number %}
+                                                    <li class="active"><span>{{ page_num }}</span></li>
+                                                    {% else %}
+                                                        {% if page_num == '...' %}
+                                                        <li><span>{{ page_num }}</span></li>
+                                                        {% else %}
+                                                        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                            <li>
+                                                {% if page_of_blogs.has_next %}
+                                                <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
+                                                    <span aria-hidden="true">&raquo;</span>
+                                                </a>
+                                                {% else %}
+                                                <span aria-hidden="true">&raquo;</span>
+                                                {% endif %}
+                                            </li>
+                                        </ul>
+                                    </div>
                         </tbody>
                     </div>
                 </div>
