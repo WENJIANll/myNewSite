@@ -13,7 +13,6 @@
     <div class="container-fluid" >
         <div class="row">
             <div class="col-sm-3 col-md-2 sidebar">
-
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="table-responsive">
@@ -25,12 +24,12 @@
                                     {{ blog_type_desc | safe}}
                                 </div>
                             </div>
-                                <ul class="nav nav-sidebar">
+                                <ul class="nav ">
                                     {% for blogtitle in blogs %}
                                         <li id="atag"  ><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}" class="glyphicon glyphicon-list-alt">--{{ blogtitle.title }}</a></li>
                                     {% endfor %}
                                 </ul>
-                                <div class="paginationdiv">
+                            <div class="paginationdiv">
                                         <ul class="pagination">
                                             <li>
                                                 {% if page_of_blogs.has_previous %}
