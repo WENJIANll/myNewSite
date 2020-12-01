@@ -192,9 +192,6 @@ div#tagtag{
  * Main content
  */
 
-.main {
-  padding: 20px;
-}
 @media (min-width: 768px) {
   .main {
     padding-right: 40px;
@@ -205,32 +202,7 @@ div#tagtag{
   margin-top: 0;
 }
 
-
-/*
- * Placeholder dashboard ideas
- */
-
-.placeholders {
-  margin-bottom: 30px;
-  text-align: center;
+.table{
+    margin-top: 80px;
 }
-.placeholders h4 {
-  margin-bottom: 0;
-}
-.placeholder {
-  margin-bottom: 20px;
-}
-.placeholder img {
-  display: inline-block;
-  border-radius: 50%;
-}
-
-
-/* div#type-title{
-    padding-left: 3em;
-}
-
-div#type-title-content{
-    padding-right: 3em;
-} */
 

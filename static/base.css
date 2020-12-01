@@ -1,4 +1,10 @@
-
+.cata{
+}
+.base{
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
 div.nav {
     background-color: #eee;
     border-bottom: 1px solid #ccc;

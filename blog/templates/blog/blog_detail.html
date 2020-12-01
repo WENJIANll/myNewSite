@@ -85,7 +85,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="blog-right-center">
                                 <div class="preblog">
                                     <p>上一篇：
@@ -106,14 +105,13 @@
                                     </p>
                                 </div>
                             </div>
-
                             <div class="blog-right-centom">
                                 <div class="coment-tip">
                                     评论
                                 </div>
                                 <div class="comment-bt">
                                     {% if user.is_authenticated %}
-            {#                        <form id="comment_form" action="{% url 'update_comment' %}" method="POST" style="overflow:hidden">#}
+                                    {#<form id="comment_form" action="{% url 'update_comment' %}" method="POST" style="overflow:hidden">#}
                                     <form id="comment_form" action="" method="POST" style="overflow:hidden">
 
                                         <label>{{ user.get_nickname_or_username }}，欢迎评论~</label>

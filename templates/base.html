@@ -21,6 +21,7 @@
   
 {#    <div class="container-fluid" style="height:2px; background-color:#f48024"></div>#}
 
+<div class="base">
     <nav class="navbar navbar-default" >
       <div class="container-fluid" >
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -31,35 +32,33 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
             <span id="baselogo">
               <p id="logo"></p>
               <a class="navbar-brand" id="logo2" href="{% url 'home' %}" >兴趣使然</a>
             </span>
-
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
-              <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
-              <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
-              <li><a href="{% url 'blogs_with_type' 6 %}">LeetCode</a></li>
-              <li><a href="{% url 'vuecomp'  %}">Vue组件</a></li>
-              <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
-
-
-                <form class="navbar-form navbar-left">
-                  <div class="form-group">
-                    <input type="text" class="form-control" placeholder="还没做好搜索">
-                  </div>
-                      <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-                </form>
-            </ul>
-
             <ul class="nav navbar-nav navbar-right">
-
+                <ul class="nav navbar-nav">
+                  <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
+                  <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
+                  <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
+                  <li><a href="{% url 'blogs_with_type' 6 %}">LeetCode</a></li>
+                  <li><a href="{% url 'vuecomp'  %}">Vue组件</a></li>
+                  <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <form class="navbar-form navbar-left">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="还没做好搜索">
+                      </div>
+                          <!-- <button type="submit" class="btn btn-default">Submit</button> -->
+                    </form>
+                </ul>
               {% if not user.is_authenticated %}
               <li>
                 <!-- request.get_full_path 供登陆成功后重定向到之前的页面-->
@@ -69,7 +68,6 @@
                 <a href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
               </li>
               {% else %}
-
                   <!-- <li><a href="#">Link</a></li> -->
               <li class="dropdown">
                 {% if user.has_nickname %}
@@ -87,9 +85,11 @@
                 </ul>
               </li>
             </ul>
-          </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
+          </div>
+      </div>
     </nav>
+</div>
+
 
 
     {% block content %}{% endblock %}
