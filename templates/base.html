@@ -26,12 +26,6 @@
       <div class="container-fluid" >
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
             <span id="baselogo">
               <p id="logo"></p>
               <a class="navbar-brand" id="logo2" href="{% url 'home' %}" >兴趣使然</a>
@@ -41,23 +35,36 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <ul class="nav navbar-nav">
+
+            </ul>
+          </div>
+      </div>
+    </nav>
+</div>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <span id="baselogo">
+              <p id="logo"></p>
+              <a class="navbar-brand" id="logo2" href="{% url 'home' %}" >兴趣使然</a>
+            </span>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+              <ul class="nav navbar-nav">
                   <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
                   <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
                   <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
                   <li><a href="{% url 'blogs_with_type' 6 %}">LeetCode</a></li>
                   <li><a href="{% url 'vuecomp'  %}">Vue组件</a></li>
                   <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <form class="navbar-form navbar-left">
-                      <div class="form-group">
-                        <input type="text" class="form-control" placeholder="还没做好搜索">
-                      </div>
-                          <!-- <button type="submit" class="btn btn-default">Submit</button> -->
-                    </form>
                 </ul>
               {% if not user.is_authenticated %}
               <li>
@@ -84,13 +91,13 @@
                 {% endif %}
                 </ul>
               </li>
-            </ul>
-          </div>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
       </div>
     </nav>
-</div>
-
-
 
     {% block content %}{% endblock %}
 

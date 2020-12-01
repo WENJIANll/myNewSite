@@ -26,15 +26,20 @@ p#logo{
     float: left;
     text-align: center;
     margin: 0;
+    padding-left: 10px;
+    margin-left: 25px;
 }
 #logo2{
     height: 35px;
     width: 175px;
     float: left;
     margin: 0;
-    color: #000;
-    font-size: x-large;
-    text-shadow: 2px -2px 1px #f48024;
+    color: #f48024;
+    font-size: 27px;
+    /*text-shadow: 1px -1px 1px #f48024;*/
+    text-align: center;
+    padding-bottom: 10px;
+    display: block;
 }
 ul.navbar-right>li>a{
     color: #000;
@@ -44,4 +49,8 @@ a{
 }
 div.container{
     /* width: 85%; */
+}
+#baselogo{
+    margin-top: 7px;
+    display: block;
 }
