@@ -170,11 +170,107 @@
             <base-input required placeholder="Enter your username" @focus="onfocus"></base-input>
             <p>  [[ msgmsg ]]  </p>
         </div>
-    </div>
 
+        <div class="subvue" id="vue9">
+            <automodel v-model="checked"></automodel>
+            [[ $data  ]]
+            <navigation-link url="www.wenjianll.com" test = "">
+                <!-- 下面的[[ url ]]是拿不到上面传递的url wenjian的，下面的url只能拿到new Vue中data中的url 要想拿到必须给slot规定上prop，然后再v-slot:top="slotProps"传进去-->
+                <!-- 组件由props，slot也可以规定自己的prop -->
+                <!-- 在slot上可以将传给组件的prop获取到，并绑定到slot的prop上 -->
+                <!--<template #top="slotProps" >---[[ slotProps ]]---</template>-->
+                <template #top="{ url111 }" >---[[ url111 ]] [[url]]---</template>
+            </navigation-link>
+        </div>
+
+        <div class="subvue" id="vue10">
+            <jiao :ress="ress"></jiao>
+        </div>
+
+    </div>
 </header>
 
     <script>
+        // 作用域插槽用武之地的冰山一角\
+        Vue.component('jiao',{
+            delimiters: ['[[',']]'],
+            props:['ress'],
+
+            template:`
+            <ul>
+                <li v-for="res in [[ress]]">[[res.title]]</li>
+            </ul>
+            `
+        })
+
+        new Vue({
+            delimiters: ['[[',']]'],
+            el  : "#vue10",
+            data : {
+                ress:[
+                    {title:'haizei',cata:'rexue'},
+                    {title:'EVA',cata:'aiqing'},
+                    {title:'juren',cata:'rexue'}
+                ]
+            }
+        })
+
+
+        // 编译作用域
+        // 绑定在slot上的属性是插槽prop
+        // 组件中的url是组件的props，而不是new Vue中data里的url
+        Vue.component('navigation-link',{
+            delimiters: ['[[',']]'],
+            props:['url','test'],
+            template:`
+            <div>
+            <slot name="top" :url111="url" :test111="test"><p>我是top</p></slot>
+            <slot name="center"><p>我是center默认插槽url：[[ url ]]</p></slot>
+            <slot name="bottom"><p>我是bottom</p></slot>
+            <a :href="url">url是 [[ url ]]</a>
+            </div>
+            `
+        })
+
+        function test(obj){
+            let {size = 'big',cords = { x:0,y:0 },radius = 25 } = obj
+            console.log(size,cords,radius);
+        }
+        test({cords:{x:18,y:30},radius:30})
+
+        function test({size = 'big',cords = { x:0,y:0 },radius = 25 } = {}){
+            console.log(size,cords,radius);
+        }
+        test({cords:{x:18,y:30},radius:30})
+
+        // 自定义model
+        Vue.component('automodel',{
+            delimiters: ["[[","]]"],
+            model : {
+                prop:'checked',
+                event : 'change'
+            },
+            props:{
+              checked : Boolean
+            },
+            template:`
+            <input
+                type="checkbox"
+                :checked="checked"
+                @change="$emit('change',$event.target.checked)"
+            >
+            `
+        })
+
+        new Vue({
+            el:"#vue9",
+            delimiters: ["[[","]]"],
+            data : {
+                checked: true,
+                url : 'uuuuuuuuuuuuu'
+            }
+        })
+
         // 普通例子
         var vm1 = new Vue({
             el : "#vue1",
