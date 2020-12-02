@@ -17,28 +17,15 @@
 
 {% block content %}
 
-
 <header class="home container-fluid movie-content">
     <div class="row" >
         <div class="ta-center" id="wenzi">
             <div>
-                <p>正在建设中，敬请期待<p>
-                <p style="margin-right: 0em;">Choose > your life<p>
-            <!-- <span>The future guides you now</span> -->
-                <p style="margin-top: 1em;"><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-                <a class="btn btn-primary btn-lg" href="#" role="button">Learn</a></p>
+                <p>路漫漫其修远兮</p>
+                <p>吾将上下而求索</p>
             </span>
             </div>
         </div>
-        <!-- <div class="col-xs-12 col-sm-8 col-md-8"  id="type-title">
-            
-        </div> -->
-        <!-- <div class="col-xs-12 col-sm-4 col-md-4 " style="background-color:#2b3137;height: 580px;;" id="type-title">
-            <span>
-                <img src="../static/home1.JPG" style="margin-top: 10em;">
-            </span>
-        </div> -->
-        
     </div>
         <div class="hot_data" >
             <div class="autodiv">
@@ -50,9 +37,6 @@
                                 <div v-for="data in today_hot">
                                     <li>[[ data.id ]] </li>
                                 </div>
-{#                                    <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>#}
-{#                                    暂无#}
-
                             </div>
                         </div>
                     </div>
@@ -88,12 +72,11 @@
                 </div>
             </div>
         </div>
-    
     <div class="foot">
         <span class="footwenzi"><a href="http://beian.miit.gov.cn/"; target=_blank>*鲁ICP备2020042945号</a></span>
     </div>
-    
 </header>
+
 
     <script>
     var app = new Vue({

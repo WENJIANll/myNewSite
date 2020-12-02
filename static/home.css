@@ -1,4 +1,3 @@
-
 .ta-center {
     text-align: center;
     font-size: 55px;
@@ -8,31 +7,19 @@
     margin-top: 2.5em;
 }
 header{
-    height: 1000px;
     position: relative;
     top: -22px;
     left: 0px;
-    
-
-    /* background-image: url(./home1.jpg) ; */
-    /* background-size: cover; */
 }
 .row{
     background-color:#2b3137;
     height: 500px;
 }
-
-
 #wenzi{
-    font-size: 35px;
+    font-size: 45px;
     color: white;
-    margin-top: 5em;
+    margin-top: 4em;
 }
-/* .movie-content
-{
-    min-height: 750px;
-} */
-
 .autodiv{
     width: 100%;
     height: 330px;
@@ -40,34 +27,33 @@ header{
 }
 .onehot{
     width: 100%;
-    height: 330px;
+    height: 230px;
     float: left;
     margin: 0 1%;
-    border: #e7e7e7 solid;
 }
 .yeshot{
     width: 100%;
-    height: 330px;
+    height: 230px;
     float: left;
     margin: 0 1%;
-    border: #e7e7e7 solid;
-
 }
 .sevenhot{
     width: 100%;
-    height: 330px;
+    height: 230px;
     float: left;
     margin: 0 1%;
-    border: #e7e7e7 solid;
-
 }
 .foot{
     width: 100%;
+    margin-bottom: 0px;
 }
 .footwenzi{
     display: block;
     width: 100%;
     text-align: center;
     margin: 0 auto;
+}
+.hot_data{
+    margin-top: 75px;
 }
 
