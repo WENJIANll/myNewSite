@@ -14,12 +14,12 @@
             <div class="container-fluid" >
                 <div class="row">
                     <div class="col-sm-3 col-md-2 sidebar">
-                      <ul class="nav nav-sidebar">
-                          {% for blogtitle in blogs %}
-                              <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">📖{{ blogtitle.title }}</a></li>
-                          {% endfor %}
-                      </ul>
-                    <div class="paginationdiv">
+                        <ul class="nav nav-sidebar">
+                            {% for blogtitle in blogs %}
+                                <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">📖{{ blogtitle.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <div >
                         <ul class="pagination">
                             <li>
                                 {% if page_of_blogs.has_previous %}
@@ -54,7 +54,7 @@
                             </li>
                         </ul>
                     </div>
-                </div>
+                    </div>
                     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                       <div class="table-responsive">
                         <div class="table table-striped">
@@ -187,6 +187,8 @@
                           </tbody>
                         </div>
                       </div>
+                    </div>
+                </div>
 
 {% endblock %}
 <!-- style="margin-top: 2em;border: 1px dashed;padding: 2em;"> -->
