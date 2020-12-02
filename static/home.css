@@ -1,20 +1,24 @@
-.ta-center {
-    margin: 0 auto;
-    width: 450px;
-    overflow: hidden;
-}
+/*.ta-center {*/
+/*    margin: 0 auto;*/
+/*    width: 450px;*/
+/*    overflow: hidden;*/
+/*}*/
 #hezi{
     font-size: 70px;
-    float: left;
-    margin-top: 189px;
-    margin-right: 10px;
+    /*float: left;*/
+    margin-top: 150px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
 }
 #wenzi{
     font-size: 35px;
     color: white;
-    margin-top: 189px;
     font-family:'Roboto Slab Bold',serif;
-    float: left;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: center;
+    /*float: left;*/
 }
 header{
     position: relative;
