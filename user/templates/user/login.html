@@ -2,6 +2,10 @@
 
 {% block title %}我的网站|登录{% endblock %}
 {% block nav_home_active %}active{% endblock %}
+{% block head-extends  %}
+    <link rel="stylesheet"  href="../../static/CSS/logandreg.css">
+{% endblock %}
+
 {% block content %}
 </br>
 </br>
@@ -9,12 +13,13 @@
     <div class="containter">
         <div class="row">
             <div class="col-xs-offset-2 col-xs-8 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 col-lg-4 col-lg-offset-4">
+            <div id="formform" >
                 {% if not user.is_authenticated %}
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">登录</h3>
                     </div>
-                    
+
                     <div class="panel-body">
                         <!--action指定submit请求什么页面-->
                         <form action="" method="POST">
@@ -25,10 +30,10 @@
                                 <p class="text-danger">{{ field.errors.as_text }}</p>
                             {% endfor %}
                             <label ></label>
-                                
+
                                 <p>欢迎欢迎~~</p>
                             <label ></label>
-                                
+
                                 <p>热烈欢迎!!</p>
                             <span class=" text-danger">{{ login_form.non_field_errors }}</span>
                             <div class="clearfix"></div>
@@ -36,7 +41,7 @@
                             <input type="submit" value="登录" class="btn btn-primary pull-right">
                         </form>
                     </div>
-                    
+
                 </div>
                 {% else %}
                 <span>未登录，跳转到首页...</span>
@@ -44,7 +49,9 @@
                 <script type="text/javascript">
                     window.location.href = '/';
                 </script>
-                {% endif %}                
+                {% endif %}
+            </div>
+
             </div>
         </div>
     </div>    

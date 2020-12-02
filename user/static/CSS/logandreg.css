@@ -1,9 +1,8 @@
 div.panel-body{
-    width: 370px;
+    width: 85%;
     margin: 0 auto;
-    margin-top: 0px;
-    margin-right: auto;
-    margin-bottom: 0px;
-    margin-left: auto;
     padding: 15px;
+}
+#formform{
+    margin-top: 100px;
 }
