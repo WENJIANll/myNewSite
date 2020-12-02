@@ -1,10 +1,20 @@
 .ta-center {
-    text-align: center;
-    font-size: 55px;
-    color:black;
-    font-family:'Roboto Slab Bold',serif;
     font-weight: 700;
-    margin-top: 2.5em;
+    margin: 0 auto;
+    width: 500px;
+}
+#hezi{
+    font-size: 85px;
+    float: left;
+    margin-top: 189px;
+    margin-right: 30px;
+}
+#wenzi{
+    font-size: 45px;
+    color: white;
+    margin-top: 4em;
+    font-family:'Roboto Slab Bold',serif;
+    float: left;
 }
 header{
     position: relative;
@@ -15,11 +25,7 @@ header{
     background-color:#2b3137;
     height: 500px;
 }
-#wenzi{
-    font-size: 45px;
-    color: white;
-    margin-top: 4em;
-}
+
 .autodiv{
     width: 100%;
     height: 330px;

@@ -19,11 +19,13 @@
 
 <header class="home container-fluid movie-content">
     <div class="row" >
-        <div class="ta-center" id="wenzi">
-            <div>
+        <div class="ta-center" >
+            <div id="hezi">
+                📦
+            </div>
+            <div id="wenzi">
                 <p>路漫漫其修远兮</p>
                 <p>吾将上下而求索</p>
-            </span>
             </div>
         </div>
     </div>
@@ -35,7 +37,7 @@
                             <div class="panel-heading" style="background-color: white;">今日热门</div>
                             <div class="panel-body" id="today-hot">
                                 <div v-for="data in today_hot">
-                                    <li>[[ data.id ]] </li>
+                                    <li>📖 [[ data.id ]] </li>
                                 </div>
                             </div>
                         </div>
@@ -47,7 +49,7 @@
                             <div class="panel-heading" style="background-color: white;">昨日热门</div>
                             <div class="panel-body" id="yes-hot">
                                 {% for data in yes_hot_data %}
-                                <li><a href="{% url 'blog_detail' data.content_object.pk %}">{{ data.content_object.title }}</a></li>
+                                <li><a href="{% url 'blog_detail' data.content_object.pk %}">📖{{ data.content_object.title }}</a></li>
                                 {% empty %}
                                 暂无
                                 {% endfor %}
@@ -62,7 +64,7 @@
                             <div class="panel-heading" style="background-color: white;">7天内热门</div>
                             <div class="panel-body" id="seven-hot">
                                 {% for data in seven_hotdata %}
-                                <li><a href="{% url 'blog_detail' data.id %}">{{ data.title }}</a></li>
+                                <li><a href="{% url 'blog_detail' data.id %}">📖{{ data.title }}</a></li>
                                 {% empty %}
                                 暂无
                                 {% endfor %}

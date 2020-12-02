@@ -21,20 +21,24 @@ div.nav a.logo {
 #logo{
     height: 35px;
     width: 38px;
-    background-image: url(./logo1.JPG);
+    /*background-image: url(./logo1.JPG);*/
     float: left;
     text-align: center;
-    margin-top: 8px;
-    margin-left: 20px;
+    margin-left: 10px;
+    font-size: 34px;
 }
 #logo2{
     height: 35px;
     width: 125px;
     float: left;
+    font-family:'Roboto Slab Bold',serif;
+
     margin-top: 9px;
     margin-left: 14px;
     color: #f48024;
-    font-size: 27px;
+    /*color: white;*/
+    /*color: #eea236;*/
+    font-size: 25px;
     /*text-shadow: 1px -1px 1px #f48024;*/
     text-align: center;
     display: block;
