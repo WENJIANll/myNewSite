@@ -5,3 +5,18 @@ div.panel-body{
 #formform{
     margin-top: 100px;
 }
+.threelogintext{
+    text-align: center;
+    color: rgba(52, 54, 54, 0.4)
+}
+.threelogin{
+    width: 50%;
+    margin: 10px auto;
+}
+.github{
+    width: 75px;
+    height: 64px;
+    display: block;
+    background-image: url(../../../static/githublogin1.png);
+    margin: 0 auto
+}

@@ -22,6 +22,10 @@
 
                     <div class="panel-body">
                         <!--action指定submit请求什么页面-->
+                        <div class="threelogintext">----第三方登录----</div>
+                        <div class="threelogin" >
+                            <a class="github" href="{% url 'social:begin' 'github' %}"></a>
+                        </div>
                         <form action="" method="POST">
                             {% csrf_token %}
                             {% for field in login_form %}
@@ -32,8 +36,6 @@
                             <label ></label>
 
                                 <p>欢迎欢迎~~</p>
-                            <label ></label>
-
                                 <p>热烈欢迎!!</p>
                             <span class=" text-danger">{{ login_form.non_field_errors }}</span>
                             <div class="clearfix"></div>
@@ -41,7 +43,6 @@
                             <input type="submit" value="登录" class="btn btn-primary pull-right">
                         </form>
                     </div>
-
                 </div>
                 {% else %}
                 <span>未登录，跳转到首页...</span>
@@ -51,7 +52,6 @@
                 </script>
                 {% endif %}
             </div>
-
             </div>
         </div>
     </div>    
