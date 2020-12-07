@@ -36,11 +36,12 @@
               <div><a id="logo2" href="{% url 'home' %}" >兴趣使然</a></div>
             </div>
         </div>
+
+        <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{% url 'blogs_with_type' 7 %}">数据结构</a></li>
                 <li><a href="{% url 'blogs_with_type' 8 %}">算法</a></li>
             </ul>
-        <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
                   <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
                   <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
