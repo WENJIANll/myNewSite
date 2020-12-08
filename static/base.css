@@ -24,7 +24,8 @@ div.nav a.logo {
     float: left;
     text-align: center;
     margin-left: 10px;
-    font-size: 34px;
+    font-size: 30px;
+    padding-top: 3px;
 }
 #logo2{
     height: 35px;
@@ -33,10 +34,9 @@ div.nav a.logo {
     font-family:'Roboto Slab Bold',serif;
 
     margin-top: 9px;
-    margin-left: 14px;
-    color: #f48024;
+    /*color: #f48024;*/
     /*color: white;*/
-    /*color: #eea236;*/
+    color: #de8d1c;
     font-size: 25px;
     /*text-shadow: 1px -1px 1px #f48024;*/
     text-align: center;

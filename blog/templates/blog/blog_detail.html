@@ -16,7 +16,7 @@
                     <div class="col-sm-3 col-md-2 sidebar">
                         <ul class="nav nav-sidebar">
                             {% for blogtitle in blogs %}
-                                <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">📔{{ blogtitle.title }}</a></li>
+                                <li id="atag"><a href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">{{ blogtitle.title }}</a></li>
                             {% endfor %}
                         </ul>
                         <div >
@@ -59,10 +59,8 @@
                       <div class="table-responsive">
                         <div class="table table-striped">
                           <tbody>
-                            <div class="panel panel-default blog-right-top" >
-                                <div class="panel-heading">
                                     <div class="blog-title">
-                                        <h2 style="font-weight: bold">📝{{ blog.title }}</h2>
+                                        <h2 style="font-weight: bold">{{ blog.title }}</h2>
                                     </div>
                                     <div class="blog-profile">
                                         <ul class="blog-info-description" >
@@ -73,8 +71,7 @@
                                         <li>📑-评论({{ blog.get_comment_num }})</li>
                                         </ul>
                                     </div>
-                                </div>
-                                <div class="panel-body">
+                        </div>
                                     <div class="blog-content markdown-body">{{ blog_content |safe }}</div>
                                     <div class="like" onclick="setlike(this, '{% get_content_type blog %}', {{ blog.pk }})">
                                         <button type="button" class="btn" style=" margin-top: 2em;">
@@ -83,8 +80,6 @@
                                             <span>喜欢</span>
                                         </button>
                                     </div>
-                                </div>
-                            </div>
                             <div class="blog-right-center">
                                 <div class="preblog">
                                     <p>上一篇：
