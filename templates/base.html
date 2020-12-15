@@ -42,11 +42,14 @@
             <ul class="nav navbar-nav navbar-left">
                 <li><a href="{% url 'blogs_with_type' 7 %}">数据结构</a></li>
                 <li><a href="{% url 'blogs_with_type' 8 %}">算法</a></li>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </form>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'blogs_with_type' 2 %}">Java</a></li>
                 <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
                 <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
-                <li><a href="{% url 'blogs_with_type' 2 %}">Shell</a></li>
                 <li><a href="{% url 'blogs_with_type' 6 %}">LeetCode</a></li>
                 <li><a href="{% url 'vuecomp' %}">Vue组件</a></li>
                 <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
@@ -80,9 +83,7 @@
                     </li>
                 {% endif %}
             </ul>
-            <form class="navbar-form navbar-right">
-                <input type="text" class="form-control" placeholder="Search...">
-            </form>
+
         </div>
     </div>
 </nav>
