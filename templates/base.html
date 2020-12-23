@@ -11,87 +11,82 @@
     <link rel="stylesheet" href="/static/base.css">
     <script type="text/javascript" src="{% static 'jquery-1.12.4.min.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'bootstrap-3.3.7/css/bootstrap.min.css' %}">
-    <script type="text/javascript" src="{% static 'bootstrap-3.3.7/js/bootstrap.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'bootstrap-4.5.0/css/bootstrap.min.css' %}">
+    <script type="text/javascript" src="{% static 'bootstrap-4.5.0/js/bootstrap.min.js' %}"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.0/axios.min.js"></script>
     {% block head-extends %}{% endblock %}
 </head>
 <body>
+<div class="container-fluid">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
 
-{#    <div class="container-fluid" style="height:2px; background-color:#f48024"></div>#}
-
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div id="baselogo">
-                {#              <div id="logo"></div>#}
-                <div id="logo">👾</div>
-                <div><a id="logo2" href="{% url 'home' %}">兴趣使然</a></div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark" STYLE="float: left"
+                   href="{% url 'home' %}">WENJIAN</a>
             </div>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <li><a href="{% url 'blogs_with_type' 7 %}">数据结构</a></li>
-                <li><a href="{% url 'blogs_with_type' 8 %}">算法</a></li>
-                <form class="navbar-form navbar-right">
-                    <input type="text" class="form-control" placeholder="Search...">
-                </form>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="{% url 'blogs_with_type' 2 %}">Java</a></li>
-                <li><a href="{% url 'blogs_with_type' 3 %}">Python</a></li>
-                <li><a href="{% url 'blogs_with_type' 1 %}">Django</a></li>
-                <li><a href="{% url 'blogs_with_type' 6 %}">LeetCode</a></li>
-                <li><a href="{% url 'vuecomp' %}">Vue组件</a></li>
-                <li><a href="{% url 'blogs_with_type' 4 %}">网站搭建记录</a></li>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+                <a class="text-muted" href="#">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="mx-3">
+                        <circle cx="10.5" cy="10.5" r="7.5"></circle>
+                        <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
+                    </svg>
+                </a>
                 {% if not user.is_authenticated %}
-                    <li>
-                        <!-- request.get_full_path 供登陆成功后重定向到之前的页面-->
-                        <a class="btn btn-primary" href="{% url 'login' %}?from={{ request.get_full_path }}"
-                           style="color: white">登录</a>
-                    </li>
-                    <li>
-                        <a class="btn btn-success" href="{% url 'register' %}?from={{ request.get_full_path }}"
-                           style="color: white">注册</a>
-                    </li>
+                    <!-- request.get_full_path 供登陆成功后重定向到之前的页面-->
+                    <a class="btn btn-primary" href="{% url 'login' %}?from={{ request.get_full_path }}"
+                       style="color: white">登录</a>
+                    <a class="btn btn-success" href="{% url 'register' %}?from={{ request.get_full_path }}"
+                       style="color: white">注册</a>
                 {% else %}
                     <!-- <li><a href="#">Link</a></li> -->
-                    <li class="dropdown">
-                        {% if user.has_nickname %}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">{{ user.username }}({{ user.get_nickname }})
-                                <span class="caret"></span></a>
-                        {% else %}
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                               aria-haspopup="true" aria-expanded="false">{{ user.username }} <span
-                                    class="caret"></span></a>
-                        {% endif %}
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'user_info' %}">个人资料</a></li>
-                            <li><a href="{% url 'admin:index' %}">后台管理</a></li>
-                            <li><a href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a></li>
-                        </ul>
-                    </li>
-                {% endif %}
-            </ul>
 
+                    {% if user.has_nickname %}
+                        <a href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{ user.username }}({{ user.get_nickname }})
+                            <span class="caret"></span></a>
+                    {% else %}
+                        <a href="#" role="button"
+                           aria-haspopup="true" aria-expanded="false">{{ user.username }} <span
+                                class="caret"></span></a>
+                    {% endif %}
+
+                    <a class="btn btn-primary" href="{% url 'user_info' %}">个人资料</a>
+                    <a class="btn btn-primary" href="{% url 'admin:index' %}">后台管理</a>
+                    <a class="btn btn-danger" href="{% url 'logout' %}?from={{ request.get_full_path }}">退出</a>
+
+                {% endif %}
+
+            </div>
         </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 96 %}">数据结构</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 94 %}">算法</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 2 %}">Java</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 3 %}">Python</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 38 %}">Django</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 78 %}">LeetCode</a>
+            <a class="p-2 text-muted" href="{% url 'blog_detail' 58 %}">网站搭建记录</a>
+            <a class="p-2 text-muted" href="#">Politics</a>
+            <a class="p-2 text-muted" href="#">Opinion</a>
+            <a class="p-2 text-muted" href="#">Science</a>
+            <a class="p-2 text-muted" href="#">Health</a>
+            <a class="p-2 text-muted" href="#">Style</a>
+            <a class="p-2 text-muted" href="#">Travel</a>
+        </nav>
     </div>
-</nav>
+</div>
 
 {% block content %}{% endblock %}
 
 <!-- Modal -->
-
 
 <script type="text/javascript">
 
@@ -115,7 +110,5 @@
 
 
 {% block script_extends %}{% endblock %}
-
-
 </body>
 </html>

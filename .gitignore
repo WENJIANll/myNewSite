@@ -1,4 +1,6 @@
 db.sqlite3
 settings.py
-__pycache__/
+__pycache__
 *.pyc
+media/editor/
+media/upload/2020/11/

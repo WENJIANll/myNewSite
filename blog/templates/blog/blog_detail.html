@@ -5,64 +5,65 @@
 {% block head-extends %}
     <link rel="stylesheet" href="{% static 'blog/blog.css' %}">
     <link rel="stylesheet" href="{% static 'mdeditor/css/editormd.preview.css' %}">
-    <link rel="stylesheet" href="{% static 'default.css' %}"/>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
     <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
+    <div class="container-fluid" style="border-top: solid black 1px;padding-top: 10px">
         <div class="row">
-            <div class="col-sm-3 col-md-2 sidebar">
-                <ul class="nav nav-sidebar">
-                    {% for blogtitle in blogs %}
-                        <li id="atag"><a
-                                href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">{{ blogtitle.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-                <div>
-                    <ul class="pagination">
-                        <li>
-                            {% if page_of_blogs.has_previous %}
-                                <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            {% else %}
-                                <span aria-hidden="true">&laquo;</span>
-                            {% endif %}
-                        </li>
-                        {# 全部页码 #}
-                        {% for page_num in page_range %}
-                            {% if page_num == page_of_blogs.number %}
-                                <li class="active"><span>{{ page_num }}</span></li>
-                            {% else %}
-                                {% if page_num == '...' %}
-                                    <li><span>{{ page_num }}</span></li>
-                                {% else %}
-                                    <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
-                                {% endif %}
-                            {% endif %}
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        {% for blogtitle in blogs %}
+                            <li id="atag"><a class="blog-header-logo1" style="color: black"
+                                             href="{% url 'blog_detail' blogtitle.pk %}?page={{ page_currn_num }}">{{ blogtitle.title }}</a>
+                            </li>
                         {% endfor %}
-
-                        <li>
-                            {% if page_of_blogs.has_next %}
-                                <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            {% else %}
-                                <span aria-hidden="true">&raquo;</span>
-                            {% endif %}
-                        </li>
                     </ul>
+                    <div>
+                        <ul class="pagination">
+                            <li class="page-item">
+                                {% if page_of_blogs.has_previous %}
+                                    <a href="?page={{ page_of_blogs.previous_page_number }}" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                {% else %}
+                                    <span aria-hidden="true">&laquo;</span>
+                                {% endif %}
+                            </li>
+                            {# 全部页码 #}
+                            {% for page_num in page_range %}
+                                {% if page_num == page_of_blogs.number %}
+                                    <li class="active"><span>{{ page_num }}</span></li>
+                                {% else %}
+                                    {% if page_num == '...' %}
+                                        <li><span>{{ page_num }}</span></li>
+                                    {% else %}
+                                        <li><a href="?page={{ page_num }}">{{ page_num }}</a></li>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+
+                            <li>
+                                {% if page_of_blogs.has_next %}
+                                    <a href="?page={{ page_of_blogs.next_page_number }}" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                {% else %}
+                                    <span aria-hidden="true">&raquo;</span>
+                                {% endif %}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+            </nav>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <div class="table-responsive">
                     <div class="table table-striped">
                         <tbody>
                         <div class="blog-title">
-                            <h2 style="font-weight: bold">{{ blog.title }}</h2>
+                            <h2 class="blog-header-logo">{{ blog.title }}</h2>
                         </div>
                         <div class="blog-profile">
                             <ul class="blog-info-description">
@@ -79,8 +80,8 @@
                     <div class="blog-content markdown-body">{{ blog_content |safe }}</div>
                     <div class="like" onclick="setlike(this, '{% get_content_type blog %}', {{ blog.pk }})">
                         <button type="button" class="btn" style=" margin-top: 2em;">
-                            <span class="glyphicon glyphicon-heart {% get_like_status blog %}"
-                                  style="margin-right: 0.5em;"></span>
+                                <span class="glyphicon glyphicon-heart {% get_like_status blog %}"
+                                      style="margin-right: 0.5em;"></span>
                             <span class="likesnum">{% get_like_count blog %}</span>
                             <span>喜欢</span>
                         </button>
@@ -135,7 +136,8 @@
                                 <a class="btn btn-primary"
                                    href="{% url 'login' %}?from={{ request.get_full_path }}">登录</a>
                                 <span> or </span>
-                                <a class="btn btn-success" href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
+                                <a class="btn btn-success"
+                                   href="{% url 'register' %}?from={{ request.get_full_path }}">注册</a>
                             {% endif %}
                         </div>
                     </div>
@@ -187,12 +189,10 @@
                             {% endfor %}
                         </div>
                     </div>
-                    </tbody>
                 </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 <!-- style="margin-top: 2em;border: 1px dashed;padding: 2em;"> -->
 

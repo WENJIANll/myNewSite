@@ -80,12 +80,12 @@
 {#                                <h4 id="atag"><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></h4>       #}
                             <p class="blog-info">
 {#                                <div id="tagtag" class="glyphicon glyphicon-tags"><a href="{% url 'blogs_with_type' blog.blog_type.pk %}"> {{ blog.blog_type }}</a></div>#}
-                                
+
 {#                                <div id="timetime" class="glyphicon glyphicon-time">{{ blog.created_time|date:"Y-m-d" }}</div>#}
 {#                                阅读（{{ blog.get_read_num }}）#}
 {#                                评论数（{{ blog.get_comment_num }}）#}
                             </p>
-                            
+
 {#                            <p>{{ blog.content|truncatechars:120 }}</p>#}
                         </div>
 {#                        {% empty %}#}
@@ -96,7 +96,7 @@
                     </div>
                 </div> -->
             <!-- <div>
-                    
+
                     <p>
 {#                        (本网站一共{{ page_of_blogs.paginator.count }}篇博客) #}
                     </p>

@@ -3,7 +3,7 @@ div.panel-body{
     margin: 0 auto;
 }
 #formform{
-    margin-top: 70px;
+    margin: 0 auto
 }
 .threelogintext{
     text-align: center;
@@ -19,4 +19,11 @@ div.panel-body{
     display: block;
     background-image: url(../../../static/githublogin1.png);
     margin: 0 auto
+}
+.containter{
+    margin: 0 auto
+}
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 2.25rem;
 }

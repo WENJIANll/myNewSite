@@ -1,3 +1,4 @@
+
 .base{
     width: 100%;
     position: fixed;
@@ -50,9 +51,10 @@ ul.navbar-right>li>a{
 a{
     text-decoration:none;
 }
-div.container{
-    /* width: 85%; */
-}
+
 #baselogo{
     width: 200px;
+}
+.container-fluid{
+    margin-top: 1%;
 }
